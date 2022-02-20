@@ -1,0 +1,23 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=17.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "parcel static/*.html",
+    "build": "parcel build static/*.html",
+    "start": "npm run build && nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Illarion Bezrukov",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.3.1",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
+    "parcel": "^2.3.1",
+    "parcel-transformer-pug-precompile": "^1.0.6"
+  }
+}

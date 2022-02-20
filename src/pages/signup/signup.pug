@@ -1,0 +1,60 @@
+- 
+  const formData = {
+      title: "Create an account",
+      inputs: {
+        email: {
+          name: "email",
+          type: "email",
+          label: "Email",
+          placeholder: "mail@example.com"
+        },
+        username: {
+          name: "login",
+          type: "text",
+          label: "Username",
+          placeholder: "Choose a username"
+        },
+        firstName: {
+          name: "first_name",
+          type: "text",
+          label: "First name",
+          placeholder: "Enter your first name"
+        },
+        secondName: {
+          name: "second_name",
+          type: "text",
+          label: "Last name",
+          placeholder: "Enter your last name"
+        },
+        phone: {
+          name: "phone",
+          type: "tel",
+          label: "Phone number",
+          placeholder: "+7 (999) 999 99 99"
+        },
+        password: {
+          name: "password",
+          type: "password",
+          label: "Password",
+          placeholder: "••••••••"
+        },
+        repeatPassword: {
+          name: "repeat_password",
+          type: "password",
+          label: "Repeat password",
+          placeholder: "••••••••"
+        },
+      },
+      button: {
+        text: "Sign up",
+      },
+      link: {
+        text: "Already a user?",
+        url: "/login.html"
+      }
+  }
+
+.container
+  include ../../modules/form/form.pug
+  +form(formData)
+    

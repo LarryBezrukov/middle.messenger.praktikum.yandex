@@ -1,0 +1,30 @@
+- 
+  const formData = {
+      title: "Sign in",
+      inputs: {
+        username: {
+          name: "login",
+          type: "text",
+          label: "Username",
+          placeholder: "Enter your username"
+        },
+        password: {
+          name: "password",
+          type: "password",
+          label: "Password",
+          placeholder: "••••••••"
+        },
+      },
+      button: {
+        text: "Log in",
+      },
+      link: {
+        text: "Don't have an account yet?",
+        url: "/signup.html"
+      }
+  }
+
+.container
+  include ../../modules/form/form.pug
+  +form(formData)
+    

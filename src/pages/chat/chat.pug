@@ -1,0 +1,13 @@
+.chat-container
+  .chat-list
+    .chat-list__header
+      h1 Inbox
+      .new-message-indicator 3 new
+    input.chat-list__search(type="text", placeholder="Search here...")
+    .chat-list__chats
+      - let n = 0
+      while n < 7
+        - n++
+        include /components/chat-placeholder/chat-placeholder.pug
+  .message-area Messages
+
