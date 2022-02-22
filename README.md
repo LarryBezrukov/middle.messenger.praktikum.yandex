@@ -1,4 +1,3 @@
-
 ## Описание
 
 Проектная работа - Messenger
@@ -29,4 +28,3 @@ https://github.com/LarryBezrukov/middle.messenger.praktikum.yandex/pull/2
 ### **Команда**
 
 Автор: Илларион Безруков
-
