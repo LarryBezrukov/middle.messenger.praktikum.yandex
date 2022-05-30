@@ -1,0 +1,20 @@
+.input {
+  margin-bottom: 1.5rem;
+
+  &:last-of-type {
+    margin-bottom: 4rem;
+  }
+
+  &__label {
+    font-weight: 400;
+  }
+
+  &__field {
+    border: 1px solid rgba(118, 99, 253, 0.6);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.4rem;
+    margin-top: 0.5rem;
+  }
+}
