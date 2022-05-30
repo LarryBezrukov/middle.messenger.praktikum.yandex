@@ -6,7 +6,7 @@
     "npm": ">=8.0.0"
   },
   "scripts": {
-    "dev": "parcel static/*.html",
+    "dev": "parcel static/*.html --no-cache",
     "build": "parcel build static/*.html",
     "start": "npm run build && nodemon app.js"
   },
@@ -14,11 +14,19 @@
   "author": "Illarion Bezrukov",
   "license": "ISC",
   "devDependencies": {
-    "@parcel/transformer-pug": "^2.3.1",
     "@parcel/transformer-sass": "^2.3.1",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb": "^19.0.4",
     "express": "^4.17.2",
     "nodemon": "^2.0.15",
     "parcel": "^2.3.1",
-    "parcel-transformer-pug-precompile": "^1.0.6"
+    "parcel-transformer-pug-precompile": "^1.0.6",
+    "stylelint": "^14.8.5",
+    "stylelint-scss": "^4.2.0"
+  },
+  "dependencies": {
+    "nanoid": "^3.3.4"
   }
 }

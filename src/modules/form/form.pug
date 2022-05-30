@@ -1,9 +1,0 @@
-mixin form({ title, inputs, button, link })
-  .form__container
-    h1= title
-    form
-      include ./components/input/input.pug
-      each input in inputs
-        +input(input.name, input.type, input.label, input.placeholder)
-      button.form__button= button.text
-    a.form__link(href=link.url)= link.text
