@@ -1,32 +1,41 @@
 {
-  "name": "messenger",
-  "version": "1.0.0",
-  "engines": {
-    "node": ">=17.0.0",
-    "npm": ">=8.0.0"
-  },
-  "scripts": {
-    "dev": "parcel static/*.html --no-cache",
-    "build": "parcel build static/*.html",
-    "start": "npm run build && nodemon app.js"
-  },
-  "keywords": [],
-  "author": "Illarion Bezrukov",
-  "license": "ISC",
-  "devDependencies": {
-    "@parcel/transformer-sass": "^2.3.1",
-    "@typescript-eslint/eslint-plugin": "^5.26.0",
-    "@typescript-eslint/parser": "^5.26.0",
-    "eslint": "^8.16.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "express": "^4.17.2",
-    "nodemon": "^2.0.15",
-    "parcel": "^2.3.1",
-    "parcel-transformer-pug-precompile": "^1.0.6",
-    "stylelint": "^14.8.5",
-    "stylelint-scss": "^4.2.0"
-  },
-  "dependencies": {
-    "nanoid": "^3.3.4"
-  }
+	"name": "messenger",
+	"version": "1.0.0",
+	"engines": {
+		"node": ">=17.0.0",
+		"npm": ">=8.0.0"
+	},
+	"scripts": {
+		"dev": "parcel static/*.html --no-cache",
+		"build": "parcel build static/*.html",
+		"start": "npm run build && nodemon app.js",
+		"lint": "eslint src/**/*.ts",
+		"lint:fix": "eslint --fix 'src/**/*.ts'",
+		"format": "prettier --write 'src/**/*.{js,ts,css,scss,pug,json}'"
+	},
+	"keywords": [],
+	"author": "Illarion Bezrukov",
+	"license": "ISC",
+	"devDependencies": {
+		"@parcel/transformer-sass": "2.6.2",
+		"@prettier/plugin-pug": "2.1.1",
+		"@typescript-eslint/eslint-plugin": "5.30.5",
+		"@typescript-eslint/parser": "5.30.5",
+		"eslint": "8.19.0",
+		"eslint-config-airbnb-base": "15.0.0",
+		"eslint-config-airbnb-typescript": "17.0.0",
+		"eslint-config-prettier": "8.5.0",
+		"eslint-plugin-import": "2.26.0",
+		"eslint-plugin-prettier": "4.2.1",
+		"express": "4.18.1",
+		"nodemon": "2.0.18",
+		"parcel": "2.6.2",
+		"parcel-transformer-pug-precompile": "1.0.6",
+		"prettier": "2.7.1",
+		"stylelint": "14.9.1",
+		"stylelint-scss": "4.2.0"
+	},
+	"dependencies": {
+		"nanoid": "4.0.0"
+	}
 }

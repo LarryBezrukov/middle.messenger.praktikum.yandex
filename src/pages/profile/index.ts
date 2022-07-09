@@ -1,9 +1,9 @@
-import ProfilePage from "./profile";
-import { renderDOM } from "../../utils/renderDOM";
-import "../../styles/global.scss";
+import ProfilePage from './profile';
+import { renderDOM } from '../../utils/renderDOM';
+import '../../styles/global.scss';
 
-document.addEventListener("DOMContentLoaded", () => {
-  const page = new ProfilePage();
+document.addEventListener('DOMContentLoaded', () => {
+	const page = new ProfilePage();
 
-  renderDOM("#app", page);
+	renderDOM('#app', page);
 });

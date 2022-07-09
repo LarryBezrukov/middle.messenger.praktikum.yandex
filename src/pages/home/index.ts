@@ -1,9 +1,9 @@
-import HomePage from "./home";
-import { renderDOM } from "../../utils/renderDOM";
-import "../../styles/global.scss";
+import HomePage from './home';
+import { renderDOM } from '../../utils/renderDOM';
+import '../../styles/global.scss';
 
-document.addEventListener("DOMContentLoaded", () => {
-  const page = new HomePage();
+document.addEventListener('DOMContentLoaded', () => {
+	const page = new HomePage();
 
-  renderDOM("#app", page);
+	renderDOM('#app', page);
 });

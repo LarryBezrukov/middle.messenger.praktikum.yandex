@@ -1,11 +1,10 @@
 .chat-container
-  .chat-list
-    .chat-list__header
-      h1 Inbox
-      .new-message-indicator 3 new
-    input.chat-list__search(type="text", placeholder="Search here...")
-    .chat-list__chats
-      each placeholder in chatPlaceholders
-        != placeholder
-  .message-area Messages
-
+	.chat-list
+		.chat-list__header
+			h1 Inbox
+			.new-message-indicator 3 new
+		input.chat-list__search(type='text', placeholder='Search here...')
+		.chat-list__chats
+			each placeholder in chatPlaceholders
+				!= placeholder
+	.message-area Messages

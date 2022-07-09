@@ -1,45 +1,45 @@
 .chat-container {
-  margin: 2rem;
-  display: flex;
-  min-height: calc(100% - 4rem);
+	margin: 2rem;
+	display: flex;
+	min-height: calc(100% - 4rem);
 }
 
 .chat-list {
-  width: 30rem;
-  padding: 2.5rem 0;
-  margin-right: 2rem;
+	width: 30rem;
+	padding: 2.5rem 0;
+	margin-right: 2rem;
 
-  &__header {
-    display: flex;
-    margin-bottom: 2rem;
+	&__header {
+		display: flex;
+		margin-bottom: 2rem;
 
-    h1 {
-      margin-right: 2rem;
-    }
+		h1 {
+			margin-right: 2rem;
+		}
 
-    .new-message-indicator {
-      background-color: rgba(118, 99, 253, 0.2);
-      padding: 0.4rem 1.2rem;
-      border-radius: 0.4rem;
-    }
-  }
+		.new-message-indicator {
+			background-color: rgba(118, 99, 253, 0.2);
+			padding: 0.4rem 1.2rem;
+			border-radius: 0.4rem;
+		}
+	}
 
-  &__search {
-    background-color: rgba(118, 99, 253, 0.05);
-    border: none;
-    border-radius: 0.8rem;
-    padding: 1.5rem;
-    width: 100%;
-    margin-bottom: 2rem;
-  }
+	&__search {
+		background-color: rgba(118, 99, 253, 0.05);
+		border: none;
+		border-radius: 0.8rem;
+		padding: 1.5rem;
+		width: 100%;
+		margin-bottom: 2rem;
+	}
 }
 
 .message-area {
-  border-radius: 1.2rem;
-  background-color: #fff;
-  width: calc(100% - 30rem);
-  padding: 2.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	border-radius: 1.2rem;
+	background-color: #fff;
+	width: calc(100% - 30rem);
+	padding: 2.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
