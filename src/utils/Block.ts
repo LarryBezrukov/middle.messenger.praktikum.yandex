@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 
@@ -15,8 +15,6 @@ class Block {
 
 	private _element: HTMLElement | null = null;
 
-	private _meta: { props: any };
-
 	protected props: any;
 
 	protected children: Record<string, Block | Block[]>;
@@ -29,10 +27,6 @@ class Block {
 		const { props, children } = this.getChildren(propsAndChildren);
 
 		this.children = children;
-
-		this._meta = {
-			props,
-		};
 
 		this.props = this._makePropsProxy(props);
 
@@ -135,9 +129,6 @@ class Block {
 	}
 
 	_makePropsProxy(props: any) {
-		// Ещё один способ передачи this, но он больше не применяется с приходом ES6+
-		const self = this;
-
 		return new Proxy(props as unknown as object, {
 			get(target: Record<string, unknown>, prop: string) {
 				const value = target[prop];
@@ -146,7 +137,7 @@ class Block {
 			set(target: Record<string, unknown>, prop: string, value: unknown) {
 				target[prop] = value;
 
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+				this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
 
 				return true;
 			},
@@ -181,7 +172,6 @@ class Block {
 	}
 
 	_createDocumentElement(tagName: string) {
-		// Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
 		return document.createElement(tagName);
 	}
 
@@ -202,6 +192,7 @@ class Block {
 
 		fragment.innerHTML = htmlString;
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		Object.entries(this.children).forEach(([key, child]) => {
 			if (Array.isArray(child)) {
 				child.forEach((ch) => {
