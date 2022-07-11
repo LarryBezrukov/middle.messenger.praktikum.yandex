@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 
@@ -84,7 +82,6 @@ class Block {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	componentDidUpdate(oldProps: any, newProps: any) {
 		return true;
 	}
@@ -154,8 +151,8 @@ class Block {
 			return;
 		}
 
-		Object.entries(events).forEach(([event, listener]) => {
-			this._element!.removeEventListener(event, listener);
+		Object.keys(events).forEach((eventName) => {
+			this._element?.removeEventListener(eventName, events[eventName]);
 		});
 	}
 
@@ -166,8 +163,8 @@ class Block {
 			return;
 		}
 
-		Object.entries(events).forEach(([event, listener]) => {
-			this._element!.addEventListener(event, listener);
+		Object.keys(events).forEach((eventName) => {
+			this._element?.addEventListener(eventName, events[eventName]);
 		});
 	}
 
@@ -192,8 +189,7 @@ class Block {
 
 		fragment.innerHTML = htmlString;
 
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		Object.entries(this.children).forEach(([key, child]) => {
+		Object.values(this.children).forEach((child) => {
 			if (Array.isArray(child)) {
 				child.forEach((ch) => {
 					const stub = fragment.content.querySelector(`[data-id="id-${ch.id}"]`);
@@ -201,8 +197,7 @@ class Block {
 					if (!stub) {
 						return;
 					}
-
-					stub.replaceWith(ch.getContent()!);
+					stub.replaceWith(ch.getContent() as HTMLElement);
 				});
 
 				return;
@@ -214,7 +209,7 @@ class Block {
 				return;
 			}
 
-			stub.replaceWith(child.getContent()!);
+			stub.replaceWith(child.getContent() as HTMLElement);
 		});
 
 		return fragment.content;
@@ -225,6 +220,7 @@ class Block {
 
 		const data = new FormData(e.target as HTMLFormElement);
 		const value = Object.fromEntries(data.entries());
+		// eslint-disable-next-line no-console
 		console.log(value);
 	}
 }

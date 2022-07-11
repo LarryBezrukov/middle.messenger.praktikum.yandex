@@ -1,27 +1,40 @@
 import Block from '../../utils/Block';
 import template from './login.pug';
+import { Form } from '../../components/Form/form';
+import { InputGroup } from '../../components/InputGroup/inputGroup';
 import { Input } from '../../components/Input/input';
 import { Button } from '../../components/Button/button';
-import { Form } from '../../components/Form/form';
 import './login.scss';
 
 export default class LoginPage extends Block {
 	protected initChildren() {
 		this.children.form = new Form({
 			formInputs: [
-				new Input({
+				new InputGroup({
 					label: 'Username',
-					type: 'text',
-					id: 'login',
-					name: 'login',
-					placeholder: 'Enter your username',
+					input: new Input({
+						type: 'text',
+						id: 'login',
+						name: 'login',
+						placeholder: 'Enter your username',
+						events: {
+							focus: () => console.log('Focus'),
+							blur: () => console.log('Blur'),
+						},
+					}),
 				}),
-				new Input({
+				new InputGroup({
 					label: 'Password',
-					type: 'password',
-					id: 'password',
-					name: 'password',
-					placeholder: '••••••••',
+					input: new Input({
+						type: 'password',
+						id: 'password',
+						name: 'password',
+						placeholder: '••••••••',
+						events: {
+							focus: () => console.log('Focus'),
+							blur: () => console.log('Blur'),
+						},
+					}),
 				}),
 			],
 			formButton: new Button({

@@ -3,11 +3,14 @@ import template from './input.pug';
 import './input.scss';
 
 interface InputProps {
-	label: string;
 	type: string;
 	id: string;
 	name: string;
 	placeholder: string;
+	events: {
+		focus: (e: InputEvent) => void;
+		blur: (e: InputEvent) => void;
+	};
 }
 
 export class Input extends Block {
