@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 
-class Block {
+export default class Block {
 	static EVENTS = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
@@ -13,6 +13,8 @@ class Block {
 
 	private _element: HTMLElement | null = null;
 
+	private _meta: { props: any };
+
 	protected props: any;
 
 	protected children: Record<string, Block | Block[]>;
@@ -21,26 +23,21 @@ class Block {
 
 	constructor(propsAndChildren: any = {}) {
 		const eventBus = new EventBus();
-
 		const { props, children } = this.getChildren(propsAndChildren);
 
 		this.children = children;
 
+		this._meta = {
+			props,
+		};
+
 		this.props = this._makePropsProxy(props);
 
 		this.initChildren();
-
 		this.eventBus = () => eventBus;
 
 		this._registerEvents(eventBus);
 		eventBus.emit(Block.EVENTS.INIT);
-	}
-
-	_registerEvents(eventBus: EventBus) {
-		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
 	}
 
 	getChildren(propsAndChildren: any) {
@@ -61,6 +58,13 @@ class Block {
 	}
 
 	protected initChildren() {}
+
+	_registerEvents(eventBus: EventBus) {
+		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+	}
 
 	init() {
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -94,7 +98,7 @@ class Block {
 		Object.assign(this.props, nextProps);
 	};
 
-	get element() {
+	get element(): HTMLElement | null {
 		return this._element;
 	}
 
@@ -126,6 +130,8 @@ class Block {
 	}
 
 	_makePropsProxy(props: any) {
+		const self = this;
+
 		return new Proxy(props as unknown as object, {
 			get(target: Record<string, unknown>, prop: string) {
 				const value = target[prop];
@@ -133,8 +139,7 @@ class Block {
 			},
 			set(target: Record<string, unknown>, prop: string, value: unknown) {
 				target[prop] = value;
-
-				this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+				self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
 
 				return true;
 			},
@@ -168,7 +173,7 @@ class Block {
 		});
 	}
 
-	_createDocumentElement(tagName: string) {
+	_createDocumentElement(tagName: string): HTMLElement {
 		return document.createElement(tagName);
 	}
 
@@ -185,7 +190,7 @@ class Block {
 			locals[key] = `<div data-id="id-${child.id}"></div>`;
 		});
 
-		const htmlString = template(locals);
+		const htmlString = template({ ...locals, children: this.children });
 
 		fragment.innerHTML = htmlString;
 
@@ -214,15 +219,4 @@ class Block {
 
 		return fragment.content;
 	}
-
-	submitHandler(e: InputEvent) {
-		e.preventDefault();
-
-		const data = new FormData(e.target as HTMLFormElement);
-		const value = Object.fromEntries(data.entries());
-		// eslint-disable-next-line no-console
-		console.log(value);
-	}
 }
-
-export default Block;

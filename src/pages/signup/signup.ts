@@ -1,7 +1,6 @@
 import Block from '../../utils/Block';
 import template from './signup.pug';
 import { InputGroup } from '../../components/InputGroup/inputGroup';
-import { Input } from '../../components/Input/input';
 import { Button } from '../../components/Button/button';
 import { Form } from '../../components/Form/form';
 import './signup.scss';
@@ -12,94 +11,59 @@ export default class SignupPage extends Block {
 			formInputs: [
 				new InputGroup({
 					label: 'Email',
-					input: new Input({
-						type: 'email',
-						id: 'email',
-						name: 'email',
-						placeholder: 'mail@example.com',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'email',
+					id: 'email',
+					name: 'email',
+					placeholder: 'mail@example.com',
+					validation: 'email',
 				}),
 				new InputGroup({
 					label: 'Username',
-					input: new Input({
-						type: 'text',
-						id: 'username',
-						name: 'username',
-						placeholder: 'Choose a username',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'text',
+					id: 'login',
+					name: 'login',
+					placeholder: 'Choose a username',
+					validation: 'login',
 				}),
 				new InputGroup({
 					label: 'First name',
-					input: new Input({
-						type: 'text',
-						id: 'fist_name',
-						name: 'fist_name',
-						placeholder: 'Enter your first name',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'text',
+					id: 'fist_name',
+					name: 'fist_name',
+					placeholder: 'Enter your first name',
+					validation: 'name',
 				}),
 				new InputGroup({
 					label: 'Last name',
-					input: new Input({
-						type: 'text',
-						id: 'last_name',
-						name: 'last_name',
-						placeholder: 'Enter your last name',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'text',
+					id: 'last_name',
+					name: 'last_name',
+					placeholder: 'Enter your last name',
+					validation: 'name',
 				}),
 				new InputGroup({
 					label: 'Phone number',
-					input: new Input({
-						type: 'tel',
-						id: 'phone',
-						name: 'phone',
-						placeholder: '+7 (999) 999 99 99',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'tel',
+					id: 'phone',
+					name: 'phone',
+					placeholder: '+7 (999) 999 99 99',
+					validation: 'phone',
 				}),
 				new InputGroup({
 					label: 'Password',
-					input: new Input({
-						type: 'password',
-						id: 'password',
-						name: 'password',
-						placeholder: '••••••••',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'password',
+					id: 'password',
+					name: 'password',
+					placeholder: '••••••••',
+					validation: 'password',
 				}),
 				new InputGroup({
 					label: 'Repeat password',
-					input: new Input({
-						type: 'password',
-						id: 'repreat_password',
-						name: 'repeat_password',
-						placeholder: '••••••••',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'password',
+					id: 'repreat_password',
+					name: 'repeat_password',
+					placeholder: '••••••••',
+					validation: 'password',
 				}),
 			],
 			formButton: new Button({
@@ -108,8 +72,23 @@ export default class SignupPage extends Block {
 				type: 'submit',
 			}),
 			events: {
-				submit: (e) => this.submitHandler(e),
+				submit: this.formSubmitHandler.bind(this),
 			},
+		});
+	}
+
+	formSubmitHandler(e: InputEvent) {
+		e.preventDefault();
+
+		const data = new FormData(e.target as HTMLFormElement);
+		const value = Object.fromEntries(data.entries());
+		// eslint-disable-next-line no-console
+		console.log(value);
+
+		const { formInputs } = this.children.form.children;
+
+		formInputs.forEach((input) => {
+			input.validateInput();
 		});
 	}
 

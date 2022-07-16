@@ -2,7 +2,6 @@ import Block from '../../utils/Block';
 import template from './login.pug';
 import { Form } from '../../components/Form/form';
 import { InputGroup } from '../../components/InputGroup/inputGroup';
-import { Input } from '../../components/Input/input';
 import { Button } from '../../components/Button/button';
 import './login.scss';
 
@@ -12,29 +11,19 @@ export default class LoginPage extends Block {
 			formInputs: [
 				new InputGroup({
 					label: 'Username',
-					input: new Input({
-						type: 'text',
-						id: 'login',
-						name: 'login',
-						placeholder: 'Enter your username',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'text',
+					id: 'login',
+					name: 'login',
+					placeholder: 'Enter your username',
+					validation: 'login',
 				}),
 				new InputGroup({
 					label: 'Password',
-					input: new Input({
-						type: 'password',
-						id: 'password',
-						name: 'password',
-						placeholder: '••••••••',
-						events: {
-							focus: () => console.log('Focus'),
-							blur: () => console.log('Blur'),
-						},
-					}),
+					type: 'password',
+					id: 'password',
+					name: 'password',
+					placeholder: '••••••••',
+					validation: 'password',
 				}),
 			],
 			formButton: new Button({
@@ -43,8 +32,23 @@ export default class LoginPage extends Block {
 				type: 'submit',
 			}),
 			events: {
-				submit: (e) => this.submitHandler(e),
+				submit: this.formSubmitHandler.bind(this),
 			},
+		});
+	}
+
+	formSubmitHandler(e: InputEvent) {
+		e.preventDefault();
+
+		const data = new FormData(e.target as HTMLFormElement);
+		const value = Object.fromEntries(data.entries());
+		// eslint-disable-next-line no-console
+		console.log(value);
+
+		const { formInputs } = this.children.form.children;
+
+		formInputs.forEach((input) => {
+			input.validateInput();
 		});
 	}
 
