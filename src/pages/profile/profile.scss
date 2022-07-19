@@ -1,41 +1,17 @@
+@import '../../styles/theme.scss';
+
 .chat-container {
 	margin: 2rem;
 	display: flex;
 	min-height: calc(100% - 4rem);
 
 	.chat-list {
-		padding: 2.5rem 0;
-		flex-basis: 30rem;
-		flex-shrink: 0;
-
-		&__header {
-			display: flex;
-			margin-bottom: 2rem;
-
-			h1 {
-				margin-right: 2rem;
-			}
-
-			.new-message-indicator {
-				background-color: rgba(118, 99, 253, 0.2);
-				padding: 0.4rem 1.2rem;
-				border-radius: 0.4rem;
-			}
-		}
-
-		&__search {
-			background-color: rgba(118, 99, 253, 0.05);
-			border: none;
-			border-radius: 0.8rem;
-			padding: 1.5rem;
-			width: 100%;
-			margin-bottom: 2rem;
-		}
+		flex: 0 0 30rem;
 	}
 
 	.message-area {
 		border-radius: 1.2rem;
-		background-color: #fff;
+		background-color: $color-white;
 		padding: 2.5rem;
 		margin: 0 2rem;
 		flex-basis: auto;
@@ -47,7 +23,7 @@
 	}
 
 	.profile {
-		background-color: #fff;
+		background-color: $color-white;
 		border-radius: 1.2rem;
 		padding: 8rem 2.5rem 4rem 2.5rem;
 		flex-basis: 40rem;
@@ -60,7 +36,7 @@
 			width: 10rem;
 			height: 10rem;
 			border-radius: 50%;
-			background-color: #c6cfda;
+			background-color: $background-color-dark;
 			margin-bottom: 2rem;
 		}
 
@@ -74,7 +50,7 @@
 			}
 
 			div:nth-child(2) {
-				color: rgba(19, 23, 35, 0.5);
+				color: $font-color-secondary;
 			}
 		}
 
@@ -89,7 +65,7 @@
 				margin-bottom: 2rem;
 
 				span:nth-child(2) {
-					color: rgba(19, 23, 35, 0.5);
+					color: $font-color-secondary;
 				}
 			}
 		}
@@ -105,7 +81,7 @@
 			}
 
 			a:nth-child(3) {
-				color: #ff0000;
+				color: $color-red;
 			}
 		}
 	}

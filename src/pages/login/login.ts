@@ -45,9 +45,9 @@ export default class LoginPage extends Block {
 		// eslint-disable-next-line no-console
 		console.log(value);
 
-		const { formInputs } = this.children.form.children;
+		const { formInputs } = this.children.form.children as unknown as Record<string, Block[]>;
 
-		formInputs.forEach((input) => {
+		formInputs.forEach((input: InputGroup) => {
 			input.validateInput();
 		});
 	}

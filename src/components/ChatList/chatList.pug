@@ -1,0 +1,8 @@
+.chat-list
+	.chat-list__header
+		h1.heading Inbox
+		.new-message-indicator 3 new
+	input.chat-list__search(type='text', placeholder='Search here...')
+	.chat-list__chats
+		each chat in chats
+			!= chat

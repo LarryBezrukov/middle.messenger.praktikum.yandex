@@ -1,6 +1,8 @@
+@import '../../styles/theme.scss';
+
 .form {
 	&__container {
-		background-color: #fff;
+		background-color: $color-white;
 		padding: 5rem 5rem 2rem 5rem;
 		border-radius: 1.2rem;
 		text-align: center;
@@ -16,17 +18,11 @@
 	}
 
 	&__button {
-		background-color: #7663fd;
-		color: #fff;
-		border-radius: 0.8rem;
-		padding: 1.5rem;
-		border: none;
 		width: 100%;
 		margin-bottom: 1.5rem;
-		cursor: pointer;
 	}
 
 	&__link {
-		color: rgba(118, 99, 253, 0.6);
+		color: rgba($color-primary, 0.6);
 	}
 }

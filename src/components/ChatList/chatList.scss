@@ -1,0 +1,31 @@
+@import '../../styles/theme.scss';
+
+.chat-list {
+	width: 30rem;
+	padding: 2.5rem 0;
+	margin-right: 2rem;
+
+	&__header {
+		display: flex;
+		margin-bottom: 2rem;
+
+		.heading {
+			margin-right: 2rem;
+		}
+
+		.new-message-indicator {
+			background-color: rgba($color-primary, 0.2);
+			padding: 0.4rem 1.2rem;
+			border-radius: 0.4rem;
+		}
+	}
+
+	&__search {
+		background-color: rgba($color-primary, 0.05);
+		border: none;
+		border-radius: 0.8rem;
+		padding: 1.5rem;
+		width: 100%;
+		margin-bottom: 2rem;
+	}
+}

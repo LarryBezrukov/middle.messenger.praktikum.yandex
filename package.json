@@ -2,8 +2,15 @@
 	"name": "messenger",
 	"version": "1.0.0",
 	"engines": {
-		"node": ">=17.0.0",
-		"npm": ">=8.0.0"
+		"node": ">=16",
+		"npm": ">=8"
+	},
+	"targets": {
+		"default": {
+			"engines": {
+				"browsers": ">= 50%"
+			}
+		}
 	},
 	"scripts": {
 		"dev": "parcel static/*.html --no-cache",

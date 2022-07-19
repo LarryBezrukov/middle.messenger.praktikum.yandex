@@ -39,7 +39,7 @@ export class InputGroup extends Block {
 	}
 
 	validateInput() {
-		const { value } = this.children.input._element;
+		const { value } = this.children.input._element as HTMLInputElement;
 
 		const [isValid, message] = Validator.validate(this.props.validation, value);
 
