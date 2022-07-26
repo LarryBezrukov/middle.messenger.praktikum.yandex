@@ -124,25 +124,23 @@ export default class Block {
 		return this.element;
 	}
 
-	private _makePropsProxy = (props: any) => {
-		const self = this;
-
+	private _makePropsProxy(props: any) {
 		return new Proxy(props as unknown as object, {
-			get(target: Record<string, unknown>, prop: string) {
+			get: (target: Record<string, unknown>, prop: string) => {
 				const value = target[prop];
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
-			set(target: Record<string, unknown>, prop: string, value: unknown) {
+			set: (target: Record<string, unknown>, prop: string, value: unknown) => {
 				target[prop] = value;
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+				this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
 
 				return true;
 			},
-			deleteProperty() {
+			deleteProperty: () => {
 				throw new Error('Нет доступа');
 			},
 		});
-	};
+	}
 
 	private _removeEvents() {
 		const { events } = this.props as any;
