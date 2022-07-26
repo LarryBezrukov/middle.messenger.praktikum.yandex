@@ -1,0 +1,10 @@
+@import '../../styles/theme.scss';
+
+.button {
+	background-color: $color-primary;
+	color: $color-white;
+	border-radius: 0.8rem;
+	padding: 1.5rem;
+	border: none;
+	cursor: pointer;
+}

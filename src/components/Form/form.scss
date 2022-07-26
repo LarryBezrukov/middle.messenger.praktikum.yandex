@@ -1,0 +1,28 @@
+@import '../../styles/theme.scss';
+
+.form {
+	&__container {
+		background-color: $color-white;
+		padding: 5rem 5rem 2rem 5rem;
+		border-radius: 1.2rem;
+		text-align: center;
+		width: 40rem;
+
+		h1 {
+			margin-bottom: 4rem;
+		}
+
+		form {
+			text-align: left;
+		}
+	}
+
+	&__button {
+		width: 100%;
+		margin-bottom: 1.5rem;
+	}
+
+	&__link {
+		color: rgba($color-primary, 0.6);
+	}
+}

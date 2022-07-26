@@ -1,0 +1,12 @@
+.input {
+	margin-bottom: 1.5rem;
+
+	&:last-of-type {
+		margin-bottom: 4rem;
+	}
+
+	&__label {
+		font-size: 14px;
+		font-weight: 400;
+	}
+}

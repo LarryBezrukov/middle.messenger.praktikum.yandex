@@ -1,0 +1,18 @@
+@import '../../styles/theme.scss';
+
+.chat-placeholder {
+	padding: 2rem 0;
+	display: flex;
+
+	&__profile-picture {
+		background-color: $background-color-dark;
+		width: 5.5rem;
+		height: 5.5rem;
+		border-radius: 100%;
+		margin-right: 1.5rem;
+	}
+
+	&__content {
+		align-self: center;
+	}
+}
