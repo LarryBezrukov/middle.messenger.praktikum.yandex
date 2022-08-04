@@ -6,7 +6,7 @@ interface ChatListProps {
 	chats: Block[];
 }
 
-export class ChatList extends Block {
+export default class ChatList extends Block {
 	constructor(props: ChatListProps) {
 		super(props);
 	}

@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import template from './chat.pug';
-import { ChatList } from '../../components/ChatList/chatList';
-import { ChatPlaceholder } from '../../components/ChatPlaceholder/chatPlaceholder';
+import ChatList from '../../components/ChatList/chatList';
+import ChatPlaceholder from '../../components/ChatPlaceholder/chatPlaceholder';
 import './chat.scss';
 
 export default class ChatPage extends Block {

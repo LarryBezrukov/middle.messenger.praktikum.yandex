@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import Validator from '../../utils/Validator';
-import { Input } from '../Input/input';
-import { InputError } from '../InputError/inputError';
+import Input from '../Input/input';
+import InputError from '../InputError/inputError';
 import template from './inputGroup.pug';
 import './inputGroup.scss';
 
@@ -14,7 +14,7 @@ interface InputGroupProps {
 	validation: string;
 }
 
-export class InputGroup extends Block {
+export default class InputGroup extends Block {
 	protected initChildren() {
 		const { type, id, name, placeholder } = this.props;
 

@@ -1,9 +1,9 @@
 import Block from '../../utils/Block';
 import template from './signup.pug';
-import { InputGroup } from '../../components/InputGroup/inputGroup';
-import { Button } from '../../components/Button/button';
-import { Form } from '../../components/Form/form';
-import './signup.scss';
+import InputGroup from '../../components/InputGroup/inputGroup';
+import Button from '../../components/Button/button';
+import Form from '../../components/Form/form';
+import Link from '../../components/Link/Link';
 
 export default class SignupPage extends Block {
 	protected initChildren() {
@@ -74,6 +74,11 @@ export default class SignupPage extends Block {
 			events: {
 				submit: this.formSubmitHandler.bind(this),
 			},
+		});
+
+		this.children.link = new Link({
+			text: 'Already a user?',
+			to: '/signin',
 		});
 	}
 

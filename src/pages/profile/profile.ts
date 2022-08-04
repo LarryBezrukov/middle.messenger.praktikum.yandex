@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import template from './profile.pug';
-import { ChatList } from '../../components/ChatList/chatList';
-import { ChatPlaceholder } from '../../components/ChatPlaceholder/chatPlaceholder';
+import ChatList from '../../components/ChatList/chatList';
+import ChatPlaceholder from '../../components/ChatPlaceholder/chatPlaceholder';
 import './profile.scss';
 
 export default class ProfilePage extends Block {

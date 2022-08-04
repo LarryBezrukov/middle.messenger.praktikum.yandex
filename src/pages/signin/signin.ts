@@ -1,11 +1,11 @@
 import Block from '../../utils/Block';
-import template from './login.pug';
-import { Form } from '../../components/Form/form';
-import { InputGroup } from '../../components/InputGroup/inputGroup';
-import { Button } from '../../components/Button/button';
-import './login.scss';
+import template from './signin.pug';
+import Form from '../../components/Form/form';
+import InputGroup from '../../components/InputGroup/inputGroup';
+import Button from '../../components/Button/button';
+import Link from '../../components/Link/Link';
 
-export default class LoginPage extends Block {
+export default class SigninPage extends Block {
 	protected initChildren() {
 		this.children.form = new Form({
 			formInputs: [
@@ -34,6 +34,11 @@ export default class LoginPage extends Block {
 			events: {
 				submit: this.formSubmitHandler.bind(this),
 			},
+		});
+
+		this.children.link = new Link({
+			text: "Don't have an account yet?",
+			to: '/signup',
 		});
 	}
 

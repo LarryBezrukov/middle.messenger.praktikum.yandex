@@ -13,8 +13,8 @@
 		}
 	},
 	"scripts": {
-		"dev": "parcel static/*.html --no-cache",
-		"build": "parcel build static/*.html",
+		"dev": "parcel src/index.html --no-cache",
+		"build": "parcel build src/index.html --no-cache --no-optimize --no-scope-hoist",
 		"start": "npm run build && nodemon app.js",
 		"lint": "eslint src/**/*.ts",
 		"lint:fix": "eslint --fix 'src/**/*.ts'",

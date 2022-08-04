@@ -10,7 +10,7 @@ interface FormProps {
 	};
 }
 
-export class Form extends Block {
+export default class Form extends Block {
 	constructor(props: FormProps) {
 		super(props);
 	}
