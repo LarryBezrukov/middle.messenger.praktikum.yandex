@@ -1,20 +1,20 @@
 import Block from '../../utils/Block';
 import template from './profile.pug';
 import ChatList from '../../components/ChatList/chatList';
-import ChatPlaceholder from '../../components/ChatPlaceholder/chatPlaceholder';
+import Chat from '../../components/Chat/chat';
+import Link from '../../components/Link/Link';
+import { withStore } from '../../utils/Store';
 import './profile.scss';
 
-export default class ProfilePage extends Block {
+class ProfilePage extends Block {
 	protected initChildren() {
 		this.children.chatList = new ChatList({
-			chats: [
-				new ChatPlaceholder(),
-				new ChatPlaceholder(),
-				new ChatPlaceholder(),
-				new ChatPlaceholder(),
-				new ChatPlaceholder(),
-				new ChatPlaceholder(),
-			],
+			chats: [],
+		});
+
+		this.children.link = new Link({
+			text: 'Log out!!!',
+			action: 'logout',
 		});
 	}
 
@@ -22,3 +22,7 @@ export default class ProfilePage extends Block {
 		return this.compile(template, {});
 	}
 }
+
+export const withUser = withStore((state) => ({ ...state.currentUser }));
+
+export default withUser(ProfilePage);

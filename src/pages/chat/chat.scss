@@ -1,17 +1,5 @@
-@import '../../styles/theme.scss';
-
 .chat-container {
 	margin: 2rem;
 	display: flex;
 	min-height: calc(100% - 4rem);
-}
-
-.message-area {
-	border-radius: 1.2rem;
-	background-color: $color-white;
-	width: calc(100% - 30rem);
-	padding: 2.5rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }

@@ -1,3 +1,4 @@
+import AuthController from '../../controllers/AuthController';
 import Block from '../../utils/Block';
 import { withRouter, WithRouterProps } from '../../utils/Router';
 import template from './link.pug';
@@ -5,7 +6,8 @@ import './link.scss';
 
 interface LinkProps extends WithRouterProps {
 	text: string;
-	to: string;
+	to?: string;
+	action?: string;
 }
 
 class Link extends Block {
@@ -17,14 +19,24 @@ class Link extends Block {
 				click: (e: MouseEvent) => {
 					e.preventDefault();
 
-					router.go(to);
+					if (to) {
+						router.go(to);
+						return;
+					}
+
+					this.actionHandler();
 				},
 			},
 		});
 	}
 
+	actionHandler() {
+		console.log('logout');
+		AuthController.logOut();
+	}
+
 	render() {
-		return this.compile(template, this.props);
+		return this.compile(template, { ...this.props });
 	}
 }
 

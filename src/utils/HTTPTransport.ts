@@ -7,67 +7,70 @@ enum Method {
 
 type Options = {
 	method: Method;
-	headers?: Record<string, string>;
 	data?: any;
-	timeout?: number;
 };
 
-type OptionsWithoutMethod = Omit<Options, 'method'>;
+export default class HTTPTransport {
+	static API_URL = 'https://ya-praktikum.tech/api/v2';
+	protected endpoint: string;
 
-function queryStringify(data: any) {
-	if (typeof data !== 'object') {
-		throw new Error('Data must be an object');
+	constructor(endpoint: string) {
+		this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
 	}
 
-	const keys = Object.keys(data);
-	return keys.reduce(
-		(result, key, index) => `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`,
-		'?',
-	);
-}
-
-export class HTTPTransport {
-	get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-		return this.request(url, { ...options, method: Method.GET }, options.timeout);
+	public get<Response>(path = '/'): Promise<Response> {
+		return this.request(this.endpoint + path);
 	}
 
-	post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-		return this.request(url, { ...options, method: Method.POST }, options.timeout);
+	public post<Response = void>(path: string, data?: unknown): Promise<Response> {
+		return this.request<Response>(this.endpoint + path, {
+			method: Method.POST,
+			data,
+		});
 	}
 
-	put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-		return this.request(url, { ...options, method: Method.PUT }, options.timeout);
+	public put<Response = void>(path: string, data: unknown): Promise<Response> {
+		return this.request<Response>(this.endpoint + path, {
+			method: Method.PUT,
+			data,
+		});
 	}
 
-	delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-		return this.request(url, { ...options, method: Method.DELETE }, options.timeout);
+	public delete<Response>(path: string): Promise<Response> {
+		return this.request<Response>(this.endpoint + path, {
+			method: Method.DELETE,
+		});
 	}
 
-	request(
+	private request<Response>(
 		url: string,
 		options: Options = { method: Method.GET },
-		timeout = 5000,
-	): Promise<XMLHttpRequest> {
-		const { method, headers = {}, data } = options;
+	): Promise<Response> {
+		const { method, data } = options;
 
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
 
-			xhr.open(method, method === Method.GET && !!data ? `${url}${queryStringify(data)}` : url);
+			xhr.open(method, url);
 
-			Object.keys(headers).forEach((key) => {
-				xhr.setRequestHeader(key, headers[key]);
-			});
-
-			xhr.onload = () => {
-				resolve(xhr);
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status < 400) {
+						resolve(xhr.response);
+					} else {
+						reject(xhr.response);
+					}
+				}
 			};
 
-			xhr.onabort = reject;
-			xhr.onerror = reject;
+			xhr.onabort = () => reject;
+			xhr.onerror = () => reject;
+			xhr.ontimeout = () => reject;
 
-			xhr.timeout = timeout;
-			xhr.ontimeout = reject;
+			xhr.setRequestHeader('Content-Type', 'application/json');
+
+			xhr.withCredentials = true;
+			xhr.responseType = 'json';
 
 			if (method === Method.GET || !data) {
 				xhr.send();

@@ -4,8 +4,11 @@ import Form from '../../components/Form/form';
 import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
 import Link from '../../components/Link/Link';
+import AuthController from '../../controllers/AuthController';
+import { SignInData } from '../../api/AuthAPI';
+import { withUser } from '../profile/profile';
 
-export default class SigninPage extends Block {
+class SigninPage extends Block {
 	protected initChildren() {
 		this.children.form = new Form({
 			formInputs: [
@@ -42,22 +45,24 @@ export default class SigninPage extends Block {
 		});
 	}
 
-	formSubmitHandler(e: InputEvent) {
+	async formSubmitHandler(e: SubmitEvent) {
 		e.preventDefault();
 
-		const data = new FormData(e.target as HTMLFormElement);
-		const value = Object.fromEntries(data.entries());
-		// eslint-disable-next-line no-console
-		console.log(value);
+		const formData = new FormData(e.target as HTMLFormElement);
+		const data = Object.fromEntries(formData.entries());
 
 		const { formInputs } = this.children.form.children as unknown as Record<string, Block[]>;
 
 		formInputs.forEach((input: InputGroup) => {
 			input.validateInput();
 		});
+
+		await AuthController.signIn(data as unknown as SignInData);
 	}
 
 	render() {
 		return this.compile(template, {});
 	}
 }
+
+export default withUser(SigninPage);

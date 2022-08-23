@@ -1,0 +1,11 @@
+@import '../../styles/theme.scss';
+
+.message-area {
+	border-radius: 1.2rem;
+	background-color: $color-white;
+	width: calc(100% - 30rem);
+	padding: 2.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}

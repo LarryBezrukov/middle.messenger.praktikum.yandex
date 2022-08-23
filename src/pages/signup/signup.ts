@@ -4,8 +4,10 @@ import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
 import Form from '../../components/Form/form';
 import Link from '../../components/Link/Link';
+import AuthController, { ControllerSignUpData } from '../../controllers/AuthController';
+import { withUser } from '../profile/profile';
 
-export default class SignupPage extends Block {
+class SignupPage extends Block {
 	protected initChildren() {
 		this.children.form = new Form({
 			formInputs: [
@@ -28,16 +30,16 @@ export default class SignupPage extends Block {
 				new InputGroup({
 					label: 'First name',
 					type: 'text',
-					id: 'fist_name',
-					name: 'fist_name',
+					id: 'first_name',
+					name: 'first_name',
 					placeholder: 'Enter your first name',
 					validation: 'name',
 				}),
 				new InputGroup({
 					label: 'Last name',
 					type: 'text',
-					id: 'last_name',
-					name: 'last_name',
+					id: 'second_name',
+					name: 'second_name',
 					placeholder: 'Enter your last name',
 					validation: 'name',
 				}),
@@ -60,8 +62,8 @@ export default class SignupPage extends Block {
 				new InputGroup({
 					label: 'Repeat password',
 					type: 'password',
-					id: 'repreat_password',
-					name: 'repeat_password',
+					id: 'confirm_password',
+					name: 'confirm_password',
 					placeholder: '••••••••',
 					validation: 'password',
 				}),
@@ -82,22 +84,24 @@ export default class SignupPage extends Block {
 		});
 	}
 
-	formSubmitHandler(e: InputEvent) {
+	async formSubmitHandler(e: SubmitEvent) {
 		e.preventDefault();
 
-		const data = new FormData(e.target as HTMLFormElement);
-		const value = Object.fromEntries(data.entries());
-		// eslint-disable-next-line no-console
-		console.log(value);
+		const formData = new FormData(e.target as HTMLFormElement);
+		const data = Object.fromEntries(formData.entries());
 
 		const { formInputs } = this.children.form.children as unknown as Record<string, Block[]>;
 
 		formInputs.forEach((input: InputGroup) => {
 			input.validateInput();
 		});
+
+		await AuthController.signUp(data as unknown as ControllerSignUpData);
 	}
 
 	render() {
 		return this.compile(template, {});
 	}
 }
+
+export default withUser(SignupPage);
