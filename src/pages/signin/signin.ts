@@ -51,7 +51,8 @@ class SigninPage extends Block {
 		const formData = new FormData(e.target as HTMLFormElement);
 		const data = Object.fromEntries(formData.entries());
 
-		const { formInputs } = this.children.form.children as unknown as Record<string, Block[]>;
+		const form = this.children.form as Block;
+		const formInputs = form.children.formInputs as Block[];
 
 		formInputs.forEach((input: InputGroup) => {
 			input.validateInput();

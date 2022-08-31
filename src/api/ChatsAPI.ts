@@ -9,7 +9,7 @@ export default class ChatsAPI extends BaseAPI {
 		return this.http.get('/');
 	}
 
-	requestToken(chatId: number): Promise<unknown> {
+	requestToken(chatId: number): Promise<Record<string, string>> {
 		return this.http.post(`/token/${chatId}`);
 	}
 

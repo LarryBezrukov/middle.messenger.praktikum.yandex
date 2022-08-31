@@ -1,0 +1,47 @@
+@import '../../styles/theme.scss';
+
+.message {
+	display: flex;
+	flex-direction: column;
+	margin: 2rem 0;
+
+	&_outgoing {
+		align-self: flex-end;
+	}
+
+	&_incoming {
+		align-self: flex-start;
+	}
+
+	&_outgoing > &__info {
+		flex-direction: row-reverse;
+		justify-content: end;
+	}
+
+	&_incoming > &__info {
+		justify-content: start;
+	}
+
+	&__info {
+		display: flex;
+		font-size: 1.3rem;
+		margin-bottom: 0.5rem;
+	}
+
+	&__author {
+		font-weight: 500;
+		margin: 0 0.5rem;
+	}
+
+	&__time {
+		color: $font-color-secondary;
+		margin: 0 0.5rem;
+	}
+
+	&__bubble {
+		background-color: $color-primary;
+		color: $color-white;
+		padding: 2rem;
+		border-radius: 2rem 0.3rem 2rem 2rem;
+	}
+}

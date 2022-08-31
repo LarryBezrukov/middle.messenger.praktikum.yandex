@@ -3,6 +3,7 @@
 .chat-placeholder {
 	padding: 2rem 0;
 	display: flex;
+	cursor: pointer;
 
 	&__profile-picture {
 		background-color: $background-color-dark;

@@ -13,14 +13,14 @@ interface Data {
 	type: 'message' | 'get old' | 'ping';
 }
 
-export default class WS {
+class WS {
 	static WS_URL = 'wss://ya-praktikum.tech/ws/chats';
-	private endpoint: string;
 	private socket: WebSocket;
+	private activeConnections: WebSocket[];
+	private messages: Record<string, unknown>[];
 
-	constructor(userId: number, chatId: number, token: string) {
-		this.endpoint = `${WS.WS_URL}/${userId}/${chatId}/${token}`;
-		this.connect();
+	constructor() {
+		this.activeConnections = [];
 	}
 
 	public async send(data: Data) {
@@ -71,7 +71,7 @@ export default class WS {
 		});
 	}
 
-	private connect() {
+	public connect(userId: number, chatId: number, token: string) {
 		if (this.socket !== undefined) {
 			this.socket.removeEventListener(Events.open, this.openEventHandler);
 			this.socket.removeEventListener(Events.close, this.closeEventHandler);
@@ -79,11 +79,20 @@ export default class WS {
 			this.socket.removeEventListener(Events.message, this.messageEventHandler);
 			this.socket.close();
 		}
-		this.socket = new WebSocket(this.endpoint);
+
+		if (this.activeConnections) {
+			this.activeConnections.forEach((ws) => ws.close());
+			this.activeConnections = [];
+		}
+
+		const endpoint = `${WS.WS_URL}/${userId}/${chatId}/${token}`;
+
+		this.socket = new WebSocket(endpoint);
 		this.socket.addEventListener(Events.open, this.openEventHandler);
 		this.socket.addEventListener(Events.close, this.closeEventHandler);
 		this.socket.addEventListener(Events.error, this.errorEventHandler);
 		this.socket.addEventListener(Events.message, this.messageEventHandler);
+		this.activeConnections.push(this.socket);
 	}
 
 	private openEventHandler = () => {
@@ -109,7 +118,15 @@ export default class WS {
 		console.log('Получены данные', data);
 
 		if (Array.isArray(data)) {
-			store.set('currentChat.messages', data);
+			this.messages = data;
+			store.set('currentChat.messages', this.messages);
+		}
+
+		if (data.type === 'message') {
+			this.messages.unshift(data);
+			store.set('currentChat.messages', this.messages);
 		}
 	};
 }
+
+export default new WS();

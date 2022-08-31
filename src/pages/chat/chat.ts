@@ -5,8 +5,8 @@ import Chat from '../../components/Chat/chat';
 import MessageArea from '../../components/MessageArea/messageArea';
 import { ChatInterface, withStore } from '../../utils/Store';
 import ChatsController from '../../controllers/ChatsController';
-import WS from '../../utils/WS';
 import './chat.scss';
+import WS from '../../utils/WS';
 
 class ChatPage extends Block {
 	protected initChildren() {
@@ -16,41 +16,27 @@ class ChatPage extends Block {
 					new Chat({
 						...chat,
 						events: {
-							click: () => {
-								this.onChatSelect(chat.id);
-							},
+							click: () => this.selectChat(chat.id),
 						},
 					}),
 			),
 		});
 
-		this.children.messageArea = new MessageArea();
+		this.children.messageArea = new MessageArea({
+			userId: this.props.currentUser.id,
+		});
 	}
-
-	private activeConnections: WS[];
 
 	constructor(props: any) {
 		super(props);
-		this.activeConnections = [];
 	}
 
-	async onChatSelect(chatId: number) {
-		if (this.activeConnections.length) {
-			this.activeConnections.forEach((ws) => ws.close());
-			this.activeConnections = [];
-		}
+	async selectChat(chatId: number) {
+		const token = await ChatsController.getToken(chatId);
 
-		await ChatsController.requestToken(chatId);
+		WS.connect(this.props.currentUser.id, chatId, token);
 
-		const ws = new WS(
-			this.props.currentUser.id,
-			this.props.currentChat.id,
-			this.props.currentChat.token,
-		);
-
-		this.activeConnections.push(ws);
-
-		ws.send({
+		WS.send({
 			content: '0',
 			type: 'get old',
 		});

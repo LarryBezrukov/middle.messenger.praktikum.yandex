@@ -1,3 +1,9 @@
 .message-area
-	div= token
-	!= messageInput
+	if messageList.length
+		.message-area__inner
+			.message-area__messages
+				each message in messageList
+					!= message
+			!= messageInput
+	else
+		.message-area__placeholder Select a chat to start messaging

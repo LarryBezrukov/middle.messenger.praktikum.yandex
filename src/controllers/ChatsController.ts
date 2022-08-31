@@ -3,9 +3,12 @@ import store from '../utils/Store';
 
 class ChatsController {
 	private api: ChatsAPI;
+	// private ws: WS;
+	// private activeWSConnections: WS[];
 
 	constructor() {
 		this.api = new ChatsAPI();
+		// this.activeWSConnections = [];
 	}
 
 	async getChats() {
@@ -14,9 +17,9 @@ class ChatsController {
 		store.set('chats', chats);
 	}
 
-	async requestToken(chatId: number) {
-		const token = await this.api.requestToken(chatId);
-		store.set('currentChat', { ...(token as Record<string, string>), id: chatId });
+	async getToken(chatId: number) {
+		const { token } = await this.api.requestToken(chatId);
+		return token;
 	}
 }
 

@@ -15,7 +15,7 @@ export default class Block {
 
 	protected props: any;
 
-	public children: Record<string, Block>;
+	public children: Record<string, Block | Block[]>;
 
 	private eventBus: () => EventBus;
 
