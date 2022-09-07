@@ -15,7 +15,7 @@ https://www.figma.com/file/YnD90xcmmvCKNSZ8HKI1j5/Messenger?node-id=0%3A1
 
 ## Ссылка на PR
 
-https://github.com/LarryBezrukov/middle.messenger.praktikum.yandex/pull/3
+https://github.com/LarryBezrukov/middle.messenger.praktikum.yandex/pull/4
 
 
 ## Установка
