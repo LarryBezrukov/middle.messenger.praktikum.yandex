@@ -1,8 +1,7 @@
 import Block from '../../utils/Block';
 import template from './profile.pug';
 import ChatList from '../../components/ChatList/chatList';
-import Chat from '../../components/Chat/chat';
-import Link from '../../components/Link/Link';
+import Link from '../../components/Link/link';
 import { withStore } from '../../utils/Store';
 import './profile.scss';
 

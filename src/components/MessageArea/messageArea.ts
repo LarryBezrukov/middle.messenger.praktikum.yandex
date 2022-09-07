@@ -3,7 +3,7 @@ import { MessageInterface, withStore } from '../../utils/Store';
 import { formatTime } from '../../utils/helpers';
 import Message from '../Message/message';
 import MessageInputGroup from '../MessageInputGroup/messageInputGroup';
-import MessageAreaHeader from '../MessageAreaHeader/MessageAreaHeader';
+import MessageAreaHeader from '../MessageAreaHeader/messageAreaHeader';
 import template from './messageArea.pug';
 import './messageArea.scss';
 

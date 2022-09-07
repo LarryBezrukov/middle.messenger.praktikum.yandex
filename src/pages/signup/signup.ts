@@ -3,7 +3,7 @@ import template from './signup.pug';
 import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
 import Form from '../../components/Form/form';
-import Link from '../../components/Link/Link';
+import Link from '../../components/Link/link';
 import AuthController, { ControllerSignUpData } from '../../controllers/AuthController';
 import { withUser } from '../profile/profile';
 

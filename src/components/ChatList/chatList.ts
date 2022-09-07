@@ -3,7 +3,7 @@ import template from './chatList.pug';
 import ChatsController from '../../controllers/ChatsController';
 import store, { ChatInterface, withStore } from '../../utils/Store';
 import WS from '../../utils/WS';
-import Link from '../Link/Link';
+import Link from '../Link/link';
 import Chat from '../Chat/chat';
 import Modal from '../Modal/modal';
 import Form from '../Form/form';

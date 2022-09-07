@@ -4,7 +4,7 @@ import { withStore } from '../../utils/Store';
 import Button from '../Button/button';
 import Form from '../Form/form';
 import InputGroup from '../InputGroup/inputGroup';
-import Link from '../Link/Link';
+import Link from '../Link/link';
 import Modal from '../Modal/modal';
 import template from './messageAreaHeader.pug';
 import './messageAreaHeader.scss';

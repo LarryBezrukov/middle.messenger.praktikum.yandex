@@ -3,7 +3,7 @@ import template from './signin.pug';
 import Form from '../../components/Form/form';
 import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
-import Link from '../../components/Link/Link';
+import Link from '../../components/Link/link';
 import AuthController from '../../controllers/AuthController';
 import { SignInData } from '../../api/AuthAPI';
 import { withUser } from '../profile/profile';
