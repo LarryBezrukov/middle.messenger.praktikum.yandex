@@ -8,14 +8,23 @@
 	border-top: 1px solid $border-color;
 
 	&__button {
-		width: 4rem;
-		height: 4rem;
-		min-width: 4rem;
-		min-height: 4rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 4.5rem;
+		height: 4.5rem;
+		min-width: 4.5rem;
+		min-height: 4.5rem;
 		background-color: $color-primary;
 		color: $color-white;
 		border-radius: 50%;
 		border: none;
+		transition: ease-in-out 0.2s all;
+		padding: 0;
 		cursor: pointer;
+
+		&:hover {
+			background-color: $color-primary-dark;
+		}
 	}
 }
