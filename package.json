@@ -14,7 +14,7 @@
 	},
 	"scripts": {
 		"dev": "parcel src/index.html --no-cache",
-		"build": "parcel build src/index.html --no-cache --no-optimize --no-scope-hoist",
+		"build": "parcel build src/index.html",
 		"start": "npm run build && nodemon app.js",
 		"lint": "eslint src/**/*.ts",
 		"lint:fix": "eslint --fix 'src/**/*.ts'",
