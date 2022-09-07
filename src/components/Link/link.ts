@@ -1,4 +1,3 @@
-import AuthController from '../../controllers/AuthController';
 import Block from '../../utils/Block';
 import { withRouter, WithRouterProps } from '../../utils/Router';
 import template from './link.pug';
@@ -7,11 +6,11 @@ import './link.scss';
 interface LinkProps extends WithRouterProps {
 	text: string;
 	to?: string;
-	action?: string;
+	action?: () => void;
 }
 
 class Link extends Block {
-	constructor({ to, router, ...props }: LinkProps) {
+	constructor({ to, action, router, ...props }: LinkProps) {
 		super({
 			...props,
 			to,
@@ -24,15 +23,12 @@ class Link extends Block {
 						return;
 					}
 
-					this.actionHandler();
+					if (action) {
+						action();
+					}
 				},
 			},
 		});
-	}
-
-	actionHandler() {
-		console.log('logout');
-		AuthController.logOut();
 	}
 
 	render() {

@@ -1,30 +1,17 @@
 import Block from '../../utils/Block';
 import template from './chat.pug';
-import ChatList from '../../components/ChatList/chatList';
-import Chat from '../../components/Chat/chat';
-import MessageArea from '../../components/MessageArea/messageArea';
-import { ChatInterface, withStore } from '../../utils/Store';
+import store from '../../utils/Store';
 import ChatsController from '../../controllers/ChatsController';
-import './chat.scss';
 import WS from '../../utils/WS';
+import ChatList from '../../components/ChatList/chatList';
+import MessageArea from '../../components/MessageArea/messageArea';
+import './chat.scss';
 
 class ChatPage extends Block {
 	protected initChildren() {
-		this.children.chatList = new ChatList({
-			chats: this.props.chats.map(
-				(chat: ChatInterface) =>
-					new Chat({
-						...chat,
-						events: {
-							click: () => this.selectChat(chat.id),
-						},
-					}),
-			),
-		});
+		this.children.ChatList = new ChatList();
 
-		this.children.messageArea = new MessageArea({
-			userId: this.props.currentUser.id,
-		});
+		this.children.MessageArea = new MessageArea();
 	}
 
 	constructor(props: any) {
@@ -40,13 +27,13 @@ class ChatPage extends Block {
 			content: '0',
 			type: 'get old',
 		});
+
+		store.set('currentChat.id', chatId);
 	}
 
 	render() {
-		return this.compile(template, {});
+		return this.compile(template, { ...this.props });
 	}
 }
 
-const withUserAndChats = withStore((state) => ({ ...state }));
-
-export default withUserAndChats(ChatPage);
+export default ChatPage;

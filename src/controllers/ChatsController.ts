@@ -1,25 +1,39 @@
-import ChatsAPI from '../api/ChatsAPI';
-import store from '../utils/Store';
+import ChatsAPI, { AddUsersData, ChatData } from '../api/ChatsAPI';
+import store, { ChatInterface } from '../utils/Store';
 
 class ChatsController {
 	private api: ChatsAPI;
-	// private ws: WS;
-	// private activeWSConnections: WS[];
 
 	constructor() {
 		this.api = new ChatsAPI();
-		// this.activeWSConnections = [];
 	}
 
 	async getChats() {
 		const chats = await this.api.request();
 
-		store.set('chats', chats);
+		const sortedChats = (chats as ChatInterface[]).sort((a, b) => {
+			if (a.last_message && !b.last_message) return -1;
+
+			if (a.last_message && b.last_message)
+				return Date.parse(b.last_message.time) - Date.parse(a.last_message.time);
+
+			return 0;
+		});
+
+		store.set('chats', sortedChats);
 	}
 
 	async getToken(chatId: number) {
 		const { token } = await this.api.requestToken(chatId);
 		return token;
+	}
+
+	async createChat(data: ChatData) {
+		await this.api.createChat(data);
+	}
+
+	async addUsersToChat(data: AddUsersData) {
+		await this.api.addUsers(data);
 	}
 }
 

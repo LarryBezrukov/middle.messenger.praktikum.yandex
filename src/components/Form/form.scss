@@ -1,6 +1,9 @@
 @import '../../styles/theme.scss';
 
 .form {
+	display: flex;
+	flex-direction: column;
+
 	&__container {
 		background-color: $color-white;
 		padding: 5rem 5rem 2rem 5rem;
@@ -17,8 +20,11 @@
 		}
 	}
 
+	&__button-container {
+		text-align: center;
+	}
+
 	&__button {
-		width: 100%;
 		margin-bottom: 1.5rem;
 	}
 }

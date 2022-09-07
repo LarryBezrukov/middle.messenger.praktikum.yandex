@@ -1,5 +1,6 @@
-.chat-placeholder
-	.chat-placeholder__profile-picture
-	.chat-placeholder__content 
+.chat(class=currentChatId === id ? 'chat_selected' : '')
+	.chat__profile-picture
+	.chat__content 
 		div= title
-		div Created by: #{ created_by }
+		if last_message
+			div Last message: #{ last_message.user.first_name }

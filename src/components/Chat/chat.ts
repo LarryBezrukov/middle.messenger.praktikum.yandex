@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import { ChatInterface } from '../../utils/Store';
+import { ChatInterface, withStore } from '../../utils/Store';
 import template from './chat.pug';
 import './chat.scss';
 
@@ -9,7 +9,7 @@ interface ChatProps extends ChatInterface {
 	};
 }
 
-export default class Chat extends Block {
+class Chat extends Block {
 	constructor(props: ChatProps) {
 		super(props);
 	}
@@ -18,3 +18,7 @@ export default class Chat extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
+
+const withMessages = withStore((state) => ({ currentChatId: state.currentChat?.id }));
+
+export default withMessages(Chat);

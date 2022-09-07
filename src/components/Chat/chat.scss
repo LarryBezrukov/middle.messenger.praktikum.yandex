@@ -1,9 +1,15 @@
 @import '../../styles/theme.scss';
 
-.chat-placeholder {
-	padding: 2rem 0;
+.chat {
 	display: flex;
+	padding: 2rem;
+	border-radius: 1.2rem;
 	cursor: pointer;
+
+	&_selected {
+		background-color: $color-primary;
+		color: $color-white;
+	}
 
 	&__profile-picture {
 		background-color: $background-color-dark;

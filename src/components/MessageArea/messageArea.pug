@@ -1,9 +1,13 @@
 .message-area
-	if messageList.length
+	if messages
 		.message-area__inner
-			.message-area__messages
-				each message in messageList
-					!= message
-			!= messageInput
+			!= MessageAreaHeader
+			if MessageList.length
+				.message-area__messages
+					each message in MessageList
+						!= message
+			else
+				.message-area__empty-chat No messages in this chat yet
+			!= MessageInput
 	else
 		.message-area__placeholder Select a chat to start messaging

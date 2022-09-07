@@ -1,12 +1,18 @@
 @import '../../styles/theme.scss';
 
 .chat-list {
+	display: flex;
+	flex-direction: column;
 	width: 30rem;
 	padding: 2.5rem 0;
 	margin-right: 2rem;
+	max-height: calc(100vh - 4rem);
+	overflow: hidden;
 
 	&__header {
 		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		margin-bottom: 2rem;
 
 		.heading {
@@ -27,5 +33,9 @@
 		padding: 1.5rem;
 		width: 100%;
 		margin-bottom: 2rem;
+	}
+
+	&__chats {
+		overflow-y: scroll;
 	}
 }

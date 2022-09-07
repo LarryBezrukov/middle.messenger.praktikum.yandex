@@ -4,22 +4,35 @@
 	display: flex;
 	flex-direction: column;
 	margin: 2rem 0;
+	max-width: 60%;
 
 	&_outgoing {
 		align-self: flex-end;
+
+		& > .message__info {
+			flex-direction: row-reverse;
+			justify-content: end;
+		}
+
+		& > .message__bubble {
+			background-color: $color-primary;
+			color: $color-white;
+			border-radius: 2rem 0.3rem 2rem 2rem;
+		}
 	}
 
 	&_incoming {
 		align-self: flex-start;
-	}
 
-	&_outgoing > &__info {
-		flex-direction: row-reverse;
-		justify-content: end;
-	}
+		& > .message__info {
+			justify-content: start;
+		}
 
-	&_incoming > &__info {
-		justify-content: start;
+		& > .message__bubble {
+			background-color: rgba($color-primary, 0.1);
+			color: $color-black;
+			border-radius: 0.3rem 2rem 2rem 2rem;
+		}
 	}
 
 	&__info {
@@ -39,9 +52,6 @@
 	}
 
 	&__bubble {
-		background-color: $color-primary;
-		color: $color-white;
 		padding: 2rem;
-		border-radius: 2rem 0.3rem 2rem 2rem;
 	}
 }

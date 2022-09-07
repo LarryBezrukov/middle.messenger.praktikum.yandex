@@ -1,8 +1,12 @@
 .chat-list
 	.chat-list__header
 		h1.heading Inbox
-		.new-message-indicator 3 new
-	input.chat-list__search(type='text', placeholder='Search here...')
+		!= NewChatLink
+	input.chat-list__search(type='text', placeholder='Search chats...')
 	.chat-list__chats
-		each chat in chats
-			!= chat
+		if Chats
+			each Chat in Chats
+				!= Chat
+
+	if newChatModal.isOpen
+		!= NewChatModal

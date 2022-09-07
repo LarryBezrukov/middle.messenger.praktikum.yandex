@@ -18,9 +18,11 @@ class WS {
 	private socket: WebSocket;
 	private activeConnections: WebSocket[];
 	private messages: Record<string, unknown>[];
+	private keepAliveIntervalId: number;
 
 	constructor() {
 		this.activeConnections = [];
+		this.keepAliveIntervalId = 0;
 	}
 
 	public async send(data: Data) {
@@ -40,16 +42,22 @@ class WS {
 		this.socket.close(code, reason);
 	}
 
-	private ping() {
+	private keepAlive() {
 		const intervalTime = 20000;
 
-		setInterval(() => {
+		this.keepAliveIntervalId = setInterval(() => {
 			if (this.socket.readyState === this.socket.OPEN) {
 				this.send({
 					type: 'ping',
 				});
 			}
 		}, intervalTime);
+	}
+
+	private cancelKeepAlive() {
+		if (this.keepAliveIntervalId) {
+			clearInterval(this.keepAliveIntervalId);
+		}
 	}
 
 	private waitForOpenConnection() {
@@ -80,24 +88,26 @@ class WS {
 			this.socket.close();
 		}
 
-		if (this.activeConnections) {
+		if (this.activeConnections.length) {
 			this.activeConnections.forEach((ws) => ws.close());
 			this.activeConnections = [];
 		}
 
+		this.cancelKeepAlive();
+
 		const endpoint = `${WS.WS_URL}/${userId}/${chatId}/${token}`;
 
 		this.socket = new WebSocket(endpoint);
+		this.activeConnections.push(this.socket);
 		this.socket.addEventListener(Events.open, this.openEventHandler);
 		this.socket.addEventListener(Events.close, this.closeEventHandler);
 		this.socket.addEventListener(Events.error, this.errorEventHandler);
 		this.socket.addEventListener(Events.message, this.messageEventHandler);
-		this.activeConnections.push(this.socket);
 	}
 
 	private openEventHandler = () => {
 		console.log('Соединение установлено');
-		this.ping();
+		this.keepAlive();
 	};
 
 	private closeEventHandler = (event: CloseEvent) => {

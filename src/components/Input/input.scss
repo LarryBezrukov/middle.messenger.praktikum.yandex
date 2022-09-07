@@ -8,5 +8,10 @@
 		width: 100%;
 		font-size: 1.4rem;
 		margin-top: 0.1rem;
+
+		&:focus {
+			outline: none;
+			border: 1px solid $color-primary;
+		}
 	}
 }

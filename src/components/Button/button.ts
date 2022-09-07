@@ -4,8 +4,9 @@ import './button.scss';
 
 interface ButtonProps {
 	label: string;
-	classes: string | string[];
 	type: string;
+	classes?: string;
+	disabled?: boolean;
 	events?: {
 		click: () => void;
 	};

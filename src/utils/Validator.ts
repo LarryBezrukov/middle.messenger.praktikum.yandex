@@ -4,6 +4,8 @@ export enum ValidationType {
 	Login = 'login',
 	Password = 'password',
 	Phone = 'phone',
+	ChatName = 'chatName',
+	Id = 'id',
 }
 
 class Validator {
@@ -20,14 +22,14 @@ class Validator {
 	name(value: string): [boolean, string] {
 		return [
 			/[A-ZА-Я][a-zа-я-]*/.test(value),
-			'This field can contain latin or cyrillic letters and -',
+			'This field can only contain latin or cyrillic letters, "-" and has to start with a capital',
 		];
 	}
 
 	login(value: string): [boolean, string] {
 		return [
 			/(?!^\d+$)[A-Za-z0-9_-]{3,20}/.test(value),
-			'Login can contain only latin letters, number, _ and -',
+			'Login can contain only latin letters, number, "_" and "-"',
 		];
 	}
 
@@ -42,6 +44,14 @@ class Validator {
 		return [/\+?[0-9]{10,15}/.test(value), 'Invalid phone number'];
 	}
 
+	chatName(value: string): [boolean, string] {
+		return [/[A-ZА-Яa-zа-я0-9_-]{1,40}/.test(value), 'Chat name cannot be empty'];
+	}
+
+	id(value: string): [boolean, string] {
+		return [/[0-9]/.test(value), 'Id can only contain numbers'];
+	}
+
 	validate(type: ValidationType, value: string): [boolean, string] {
 		switch (type) {
 			case ValidationType.Email:
@@ -54,6 +64,10 @@ class Validator {
 				return this.password(value);
 			case ValidationType.Phone:
 				return this.phone(value);
+			case ValidationType.ChatName:
+				return this.chatName(value);
+			case ValidationType.Id:
+				return this.id(value);
 			default:
 				return [!!value.length, 'This field cannot be empty'];
 		}

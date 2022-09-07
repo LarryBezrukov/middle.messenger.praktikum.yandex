@@ -1,0 +1,21 @@
+@import '../../styles/theme.scss';
+
+.message-input {
+	align-self: flex-end;
+	display: flex;
+	width: 100%;
+	padding: 2rem;
+	border-top: 1px solid $border-color;
+
+	&__button {
+		width: 4rem;
+		height: 4rem;
+		min-width: 4rem;
+		min-height: 4rem;
+		background-color: $color-primary;
+		color: $color-white;
+		border-radius: 50%;
+		border: none;
+		cursor: pointer;
+	}
+}

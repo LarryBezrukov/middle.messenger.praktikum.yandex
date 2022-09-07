@@ -81,3 +81,13 @@ export function isEqual(lhs: Indexed, rhs: Indexed) {
 
 	return true;
 }
+
+export function formatTime(time: string) {
+	const parsedTime = Date.parse(time);
+	return new Date(parsedTime).toLocaleString('en-US', {
+		month: 'short',
+		day: 'numeric',
+		hour: 'numeric',
+		minute: 'numeric',
+	});
+}

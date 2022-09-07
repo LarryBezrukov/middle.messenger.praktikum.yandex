@@ -3,8 +3,18 @@
 .button {
 	background-color: $color-primary;
 	color: $color-white;
+	align-self: center;
 	border-radius: 0.8rem;
-	padding: 1.5rem;
+	padding: 1.5rem 5rem;
 	border: none;
+	transition: ease-in-out 0.2s all;
 	cursor: pointer;
+
+	&:hover {
+		background-color: $color-primary-dark;
+	}
+
+	&:disabled {
+		background-color: rgba($color-primary, 0.4);
+	}
 }

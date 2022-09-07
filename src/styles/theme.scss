@@ -1,8 +1,14 @@
 $color-primary: #7663fd;
+$color-primary-dark: #6c31fc;
+
+$color-black: #131723;
 $color-white: #fff;
 $color-red: #ff0000;
 
-$font-color-primary: #000;
-$font-color-secondary: rgba(19, 23, 35, 0.5);
+$font-color-primary: $color-black;
+$font-color-secondary: rgba($font-color-primary, 0.5);
 
+$background-color-medium: #f7f7f9;
 $background-color-dark: #c6cfda;
+
+$border-color: #eff1f5;

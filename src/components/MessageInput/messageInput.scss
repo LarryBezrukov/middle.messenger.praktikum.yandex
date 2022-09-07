@@ -1,20 +1,10 @@
-@import '../../styles/theme.scss';
-
 .message-input {
-	align-self: flex-end;
-	display: flex;
-	width: 100%;
-	padding: 2rem;
-
-	&__button {
-		width: 4rem;
-		height: 4rem;
-		min-width: 4rem;
-		min-height: 4rem;
-		background-color: $color-primary;
-		color: $color-white;
-		border-radius: 50%;
+	&__field {
+		width: 100%;
 		border: none;
-		cursor: pointer;
+		outline: none;
+		resize: none;
+		margin-right: 1rem;
+		border-radius: 0 0 0 1.2rem;
 	}
 }

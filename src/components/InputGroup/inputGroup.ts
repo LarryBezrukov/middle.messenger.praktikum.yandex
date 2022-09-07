@@ -11,7 +11,7 @@ interface InputGroupProps {
 	id: string;
 	name: string;
 	placeholder: string;
-	validation: string;
+	validation?: string;
 }
 
 export default class InputGroup extends Block {

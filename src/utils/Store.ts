@@ -23,13 +23,44 @@ export interface ChatInterface {
 	avatar: string | null;
 	created_by: string;
 	unread_count: number;
-	last_message: Record<string, unknown> | null;
+	last_message: LastMessageInterface;
+}
+
+interface CurrentChatInterface {
+	id: number | null;
+	messages: MessageInterface[] | null;
+}
+
+export interface MessageInterface {
+	id: number;
+	chat_id: number;
+	user_id: number;
+	content: string;
+	is_read: boolean;
+	time: string;
+	type: string;
+	file: Record<string, string | number> | null;
+}
+
+interface LastMessageInterface {
+	id: number;
+	user: UserInterface;
+	time: string;
+	content: string;
+}
+
+interface ButtonInterface {
+	disabled: boolean;
 }
 
 interface StoreData {
 	currentUser?: UserInterface;
 	chats?: ChatInterface[];
-	currentChat?: Record<string, string>;
+	currentChat?: CurrentChatInterface;
+	button?: ButtonInterface;
+	addUserModal?: {
+		isOpen: true | false;
+	};
 }
 
 export class Store extends EventBus {

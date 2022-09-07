@@ -21,7 +21,8 @@ body {
 	font-weight: 400;
 	font-style: normal;
 	font-size: 1.6rem;
-	background-color: #f7f7f9;
+	color: $font-color-primary;
+	background-color: $background-color-medium;
 	height: 100vh;
 }
 
@@ -65,7 +66,6 @@ select {
 
 a {
 	text-decoration: none;
-	color: rgba(118, 99, 253, 0.8);
 }
 
 #app {

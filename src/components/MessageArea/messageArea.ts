@@ -1,44 +1,37 @@
 import Block from '../../utils/Block';
-import template from './messageArea.pug';
-import { withStore } from '../../utils/Store';
+import { MessageInterface, withStore } from '../../utils/Store';
+import { formatTime } from '../../utils/helpers';
 import Message from '../Message/message';
-import MessageInput from '../MessageInput/messageInput';
+import MessageInputGroup from '../MessageInputGroup/messageInputGroup';
+import MessageAreaHeader from '../MessageAreaHeader/MessageAreaHeader';
+import template from './messageArea.pug';
 import './messageArea.scss';
 
 interface MessageAreaProps {
 	userId: number;
 }
 
-interface MessageInterface {
-	id: number;
-	user_id: number;
-	chat_id: number;
-	type: string;
-	time: string;
-	content: string;
-	is_read: boolean;
-	file: Record<string, string | number> | null;
-}
-
 class MessageArea extends Block {
 	protected initChildren() {
-		this.children.messageInput = new MessageInput();
+		this.children.MessageAreaHeader = new MessageAreaHeader();
+
+		this.children.MessageInput = new MessageInputGroup();
 	}
 
 	constructor(props: MessageAreaProps) {
 		super(props);
 	}
 
-	returnMessages(): Block[] {
+	renderMessages() {
 		if (this.props.messages) {
-			return this.props.messages.map((message: MessageInterface) => {
-				const dateAndTime = this.formatTime(message.time);
+			this.children.MessageList = this.props.messages.map((message: MessageInterface) => {
+				const dateAndTime = formatTime(message.time);
 
 				return new Message({
 					...message,
 					time: dateAndTime,
 					className:
-						this.props.userId === message.user_id ? 'message_outgoing' : 'message_incoming',
+						this.props.currentUserId === message.user_id ? 'message_outgoing' : 'message_incoming',
 				});
 			});
 		}
@@ -46,22 +39,15 @@ class MessageArea extends Block {
 		return [];
 	}
 
-	private formatTime(time: string) {
-		const parsedTime = Date.parse(time);
-		return new Date(parsedTime).toLocaleString('en-US', {
-			month: 'short',
-			day: 'numeric',
-			hour: 'numeric',
-			minute: 'numeric',
-		});
-	}
-
 	render() {
-		this.children.messageList = this.returnMessages();
+		this.renderMessages();
 		return this.compile(template, { ...this.props });
 	}
 }
 
-const withMessages = withStore((state) => ({ ...state.currentChat }));
+const withMessages = withStore((state) => ({
+	...state.currentChat,
+	currentUserId: state.currentUser!.id,
+}));
 
 export default withMessages(MessageArea);

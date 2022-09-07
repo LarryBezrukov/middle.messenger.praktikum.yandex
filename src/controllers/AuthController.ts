@@ -27,7 +27,6 @@ class AuthController {
 		store.set('currentUser.isLoading', true);
 
 		const response = await this.api.signup(signUpData);
-		console.log(response);
 
 		if (apiHasError(response)) {
 			store.set('currentUser.error', response.reason);
@@ -43,8 +42,7 @@ class AuthController {
 	}
 
 	async signIn(data: SignInData) {
-		const response = await this.api.signin(data);
-		console.log(response);
+		await this.api.signin(data);
 
 		await this.fetchUser();
 
@@ -54,8 +52,7 @@ class AuthController {
 	}
 
 	async logOut() {
-		const response = await this.api.logout();
-		console.log(response);
+		await this.api.logout();
 
 		const router = new Router();
 
