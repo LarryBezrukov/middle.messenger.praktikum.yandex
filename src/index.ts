@@ -11,7 +11,13 @@ import './styles/global.scss';
 document.addEventListener('DOMContentLoaded', async () => {
 	const router = new Router();
 
-	router.use('/chat', ChatPage).use('/signin', SigninPage).use('/signup', SignupPage);
+	router
+		.use('/chat', ChatPage)
+		.use('/signin', SigninPage)
+		.use('/signup', SignupPage)
+		.use('/profile', ProfilePage)
+		.use('/404', ErrorPage, { errorCode: 404, errorText: 'Page not found' })
+		.use('/500', ErrorPage, { errorCode: 500, errorText: 'Internal server error' });
 
 	try {
 		await AuthController.fetchUser();

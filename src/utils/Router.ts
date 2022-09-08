@@ -32,7 +32,7 @@ class Route {
 
 	render() {
 		if (!this.block) {
-			this.block = new this.BlockClass();
+			this.block = new this.BlockClass(this.props.pageProps);
 		}
 
 		const root = document.querySelector(this.props.rootQuery);
