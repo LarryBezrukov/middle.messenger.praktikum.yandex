@@ -31,7 +31,7 @@ class MessageArea extends Block {
 					...message,
 					time: dateAndTime,
 					className:
-						this.props.currentUserId === message.user_id ? 'message_outgoing' : 'message_incoming',
+						this.props.currentUser.id === message.user_id ? 'message_outgoing' : 'message_incoming',
 				});
 			});
 		}
@@ -47,7 +47,7 @@ class MessageArea extends Block {
 
 const withMessages = withStore((state) => ({
 	...state.currentChat,
-	currentUserId: state.currentUser!.id,
+	currentUser: state.currentUser,
 }));
 
 export default withMessages(MessageArea);

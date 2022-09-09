@@ -25,10 +25,14 @@ export default class MessageInputGroup extends Block {
 		const formData = new FormData(e.target as HTMLFormElement);
 		const data = Object.fromEntries(formData.entries());
 
+		const form = e.target as HTMLFormElement;
+
 		WS.send({
 			content: data.message as string,
 			type: 'message',
 		});
+
+		form.reset();
 	}
 
 	render() {

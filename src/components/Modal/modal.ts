@@ -3,8 +3,8 @@ import template from './modal.pug';
 import './modal.scss';
 
 interface ModalProps {
-	title: string;
-	content: Block;
+	title?: string;
+	content: Block[];
 	close: () => void;
 }
 

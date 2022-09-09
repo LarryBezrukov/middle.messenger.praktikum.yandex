@@ -37,7 +37,6 @@ class AuthController {
 		await this.fetchUser();
 
 		const router = new Router();
-
 		router.go('/profile');
 	}
 
@@ -47,15 +46,16 @@ class AuthController {
 		await this.fetchUser();
 
 		const router = new Router();
-
 		router.go('/chat');
 	}
 
 	async logOut() {
 		await this.api.logout();
 
-		const router = new Router();
+		store.set('currentUser', null);
+		store.set('chats', null);
 
+		const router = new Router();
 		router.go('/signin');
 	}
 

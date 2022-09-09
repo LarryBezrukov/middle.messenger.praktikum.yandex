@@ -1,5 +1,4 @@
 import Block from '../../utils/Block';
-import template from './chatList.pug';
 import ChatsController from '../../controllers/ChatsController';
 import store, { ChatInterface, withStore } from '../../utils/Store';
 import WS from '../../utils/WS';
@@ -9,12 +8,11 @@ import Modal from '../Modal/modal';
 import Form from '../Form/form';
 import InputGroup from '../InputGroup/inputGroup';
 import Button from '../Button/button';
+import template from './chatList.pug';
 import './chatList.scss';
 
 class ChatList extends Block {
 	protected initChildren() {
-		this.renderChats();
-
 		this.children.NewChatLink = new Link({
 			text: 'New chat',
 			action: this.openNewChatModal.bind(this),
@@ -22,25 +20,27 @@ class ChatList extends Block {
 
 		this.children.NewChatModal = new Modal({
 			title: 'Create new chat',
-			content: new Form({
-				formInputs: [
-					new InputGroup({
-						label: 'Chat name',
-						type: 'text',
-						id: 'chatName',
-						name: 'chatName',
-						placeholder: 'Enter chat name',
-						validation: 'chatName',
+			content: [
+				new Form({
+					formInputs: [
+						new InputGroup({
+							label: 'Chat name',
+							type: 'text',
+							id: 'chatName',
+							name: 'chatName',
+							placeholder: 'Enter chat name',
+							validation: 'chatName',
+						}),
+					],
+					formButton: new Button({
+						label: 'Create chat',
+						type: 'submit',
 					}),
-				],
-				formButton: new Button({
-					label: 'Create chat',
-					type: 'submit',
+					events: {
+						submit: this.createNewChat.bind(this),
+					},
 				}),
-				events: {
-					submit: this.createNewChat.bind(this),
-				},
-			}),
+			],
 			close: this.closeNewChatModal.bind(this),
 		});
 	}
@@ -71,7 +71,7 @@ class ChatList extends Block {
 	async selectChat(chatId: number) {
 		const token = await ChatsController.getToken(chatId);
 
-		WS.connect(this.props.userId, chatId, token);
+		WS.connect(this.props.currentUser.id, chatId, token);
 
 		WS.send({
 			content: '0',
@@ -114,13 +114,14 @@ class ChatList extends Block {
 	}
 
 	render() {
+		this.renderChats();
 		return this.compile(template, { ...this.props });
 	}
 }
 
 const withUserAndChats = withStore((state) => ({
 	chats: state.chats,
-	userId: state.currentUser!.id,
+	currentUser: state.currentUser,
 }));
 
 export default withUserAndChats(ChatList);

@@ -5,13 +5,14 @@ import ChatsController from '../../controllers/ChatsController';
 import WS from '../../utils/WS';
 import ChatList from '../../components/ChatList/chatList';
 import MessageArea from '../../components/MessageArea/messageArea';
+import Profile from '../../components/Profile/profile';
 import './chat.scss';
 
 class ChatPage extends Block {
 	protected initChildren() {
 		this.children.ChatList = new ChatList();
-
 		this.children.MessageArea = new MessageArea();
+		this.children.Profile = new Profile();
 	}
 
 	constructor(props: any) {

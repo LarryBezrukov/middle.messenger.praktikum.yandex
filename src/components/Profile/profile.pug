@@ -1,0 +1,31 @@
+.profile
+	!= ProfileHeader
+	.profile__info
+		.profile__row
+			span.profile__key Email
+			span.profile__value= email
+		.profile__row
+			span.profile__key Username
+			span.profile__value= login
+		.profile__row
+			span.profile__key First name
+			span.profile__value= first_name
+		.profile__row
+			span.profile__key Last name
+			span.profile__value= second_name
+		.profile__row
+			span.profile__key Display name
+			span.profile__value= display_name
+		.profile__row
+			span.profile__key Phone
+			span.profile__value= phone
+	.profile__buttons
+		!= EditProfileButton
+		!= ChangePasswordButton
+		!= LogoutLink
+
+	if editProfileModal.isOpen
+		!= EditProfileModal
+
+	if changePasswordModal.isOpen
+		!= ChangePasswordModal

@@ -2,5 +2,6 @@
 	.modal__window
 		span.modal__close-button &times;
 		.modal__title= title
-		!= content
+		each item in content
+			!= item
 	.modal__overlay

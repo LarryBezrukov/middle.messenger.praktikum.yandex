@@ -18,25 +18,27 @@ class MessageAreaHeader extends Block {
 
 		this.children.AddUserModal = new Modal({
 			title: 'Add user to chat',
-			content: new Form({
-				formInputs: [
-					new InputGroup({
-						label: 'User ID',
-						type: 'number',
-						id: 'userId',
-						name: 'userId',
-						placeholder: 'Enter ID of the user to add',
-						validation: 'id',
+			content: [
+				new Form({
+					formInputs: [
+						new InputGroup({
+							label: 'User ID',
+							type: 'number',
+							id: 'userId',
+							name: 'userId',
+							placeholder: 'Enter ID of the user to add',
+							validation: 'id',
+						}),
+					],
+					formButton: new Button({
+						label: 'Add user',
+						type: 'submit',
 					}),
-				],
-				formButton: new Button({
-					label: 'Add user',
-					type: 'submit',
+					events: {
+						submit: this.addUserToChat.bind(this),
+					},
 				}),
-				events: {
-					submit: this.addUserToChat.bind(this),
-				},
-			}),
+			],
 			close: this.closeAddUserModal.bind(this),
 		});
 	}
