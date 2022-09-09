@@ -33,7 +33,7 @@
 		justify-content: space-between;
 		margin-top: auto;
 
-		a:nth-child(3) {
+		&:nth-child(3) {
 			color: $color-red;
 		}
 	}

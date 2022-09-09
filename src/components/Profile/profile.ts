@@ -1,5 +1,7 @@
 import Block from '../../utils/Block';
 import AuthController from '../../controllers/AuthController';
+import UsersController from '../../controllers/UsersController';
+import { PasswordData, UserData } from '../../api/UsersAPI';
 import { withStore } from '../../utils/Store';
 import ProfileHeader from '../ProfileHeader/profileHeader';
 import Link from '../Link/link';
@@ -16,22 +18,12 @@ class Profile extends Block {
 
 		this.children.EditProfileButton = new Link({
 			text: 'Edit profile',
-			action: () =>
-				this.setProps({
-					editProfileModal: {
-						isOpen: true,
-					},
-				}),
+			action: this.openEditProfileModal.bind(this),
 		});
 
 		this.children.ChangePasswordButton = new Link({
-			text: 'Cahnge password',
-			action: () =>
-				this.setProps({
-					changePasswordModal: {
-						isOpen: true,
-					},
-				}),
+			text: 'Change password',
+			action: this.openChangePasswordModal.bind(this),
 		});
 
 		this.children.LogoutLink = new Link({
@@ -51,14 +43,25 @@ class Profile extends Block {
 							name: 'email',
 							placeholder: 'mail@example.com',
 							validation: 'email',
+							value: this.props.email,
 						}),
 						new InputGroup({
-							label: 'Username',
+							label: 'Login',
 							type: 'text',
 							id: 'login',
 							name: 'login',
-							placeholder: 'Choose a username',
+							placeholder: 'Choose a login',
 							validation: 'login',
+							value: this.props.login,
+						}),
+						new InputGroup({
+							label: 'Dsiplay name',
+							type: 'text',
+							id: 'display_name',
+							name: 'display_name',
+							placeholder: 'Choose a display name',
+							validation: 'login',
+							value: this.props.display_name,
 						}),
 						new InputGroup({
 							label: 'First name',
@@ -67,6 +70,7 @@ class Profile extends Block {
 							name: 'first_name',
 							placeholder: 'Enter your first name',
 							validation: 'name',
+							value: this.props.first_name,
 						}),
 						new InputGroup({
 							label: 'Last name',
@@ -75,6 +79,7 @@ class Profile extends Block {
 							name: 'second_name',
 							placeholder: 'Enter your last name',
 							validation: 'name',
+							value: this.props.second_name,
 						}),
 						new InputGroup({
 							label: 'Phone number',
@@ -83,6 +88,7 @@ class Profile extends Block {
 							name: 'phone',
 							placeholder: '+7 (999) 999 99 99',
 							validation: 'phone',
+							value: this.props.phone,
 						}),
 					],
 					formButton: new Button({
@@ -90,16 +96,11 @@ class Profile extends Block {
 						type: 'submit',
 					}),
 					events: {
-						submit: this.updateProfile.bind(this),
+						submit: this.editProfile.bind(this),
 					},
 				}),
 			],
-			close: () =>
-				this.setProps({
-					editProfileModal: {
-						isOpen: false,
-					},
-				}),
+			close: this.closeEditProfileModal.bind(this),
 		});
 
 		this.children.ChangePasswordModal = new Modal({
@@ -108,18 +109,26 @@ class Profile extends Block {
 				new Form({
 					formInputs: [
 						new InputGroup({
-							label: 'Password',
+							label: 'Old password',
 							type: 'password',
-							id: 'password',
-							name: 'password',
+							id: 'oldPassword',
+							name: 'oldPassword',
 							placeholder: '••••••••',
 							validation: 'password',
 						}),
 						new InputGroup({
-							label: 'Repeat password',
+							label: 'New password',
 							type: 'password',
-							id: 'confirm_password',
-							name: 'confirm_password',
+							id: 'newPassword',
+							name: 'newPassword',
+							placeholder: '••••••••',
+							validation: 'password',
+						}),
+						new InputGroup({
+							label: 'Repeat new password',
+							type: 'password',
+							id: 'confirmPassword',
+							name: 'confirmPassword',
 							placeholder: '••••••••',
 							validation: 'password',
 						}),
@@ -133,12 +142,7 @@ class Profile extends Block {
 					},
 				}),
 			],
-			close: () =>
-				this.setProps({
-					changePasswordModal: {
-						isOpen: false,
-					},
-				}),
+			close: this.closeChangePasswordModal.bind(this),
 		});
 	}
 
@@ -154,16 +158,56 @@ class Profile extends Block {
 		});
 	}
 
-	updateProfile(e: SubmitEvent) {
-		e.preventDefault();
-
-		console.log('Edit profile');
+	openEditProfileModal() {
+		this.setProps({
+			editProfileModal: {
+				isOpen: true,
+			},
+		});
 	}
 
-	changePassword(e: SubmitEvent) {
+	closeEditProfileModal() {
+		this.setProps({
+			editProfileModal: {
+				isOpen: false,
+			},
+		});
+	}
+
+	openChangePasswordModal() {
+		this.setProps({
+			changePasswordModal: {
+				isOpen: true,
+			},
+		});
+	}
+
+	closeChangePasswordModal() {
+		this.setProps({
+			changePasswordModal: {
+				isOpen: false,
+			},
+		});
+	}
+
+	async editProfile(e: SubmitEvent) {
 		e.preventDefault();
 
-		console.log('Cahnge password');
+		const formData = new FormData(e.target as HTMLFormElement);
+		const data = Object.fromEntries(formData.entries());
+
+		await UsersController.changeProfile(data as unknown as UserData);
+
+		this.closeEditProfileModal();
+	}
+
+	async changePassword(e: SubmitEvent) {
+		e.preventDefault();
+
+		const formData = new FormData(e.target as HTMLFormElement);
+		const data = Object.fromEntries(formData.entries());
+
+		await UsersController.changePassword(data as unknown as PasswordData);
 	}
 
 	render() {

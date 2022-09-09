@@ -12,17 +12,13 @@ interface InputGroupProps {
 	name: string;
 	placeholder: string;
 	validation?: string;
+	value?: string;
 }
 
 export default class InputGroup extends Block {
 	protected initChildren() {
-		const { type, id, name, placeholder } = this.props;
-
 		this.children.input = new Input({
-			type,
-			id,
-			name,
-			placeholder,
+			...this.props,
 			events: {
 				focus: this.validateInput.bind(this),
 				blur: this.validateInput.bind(this),

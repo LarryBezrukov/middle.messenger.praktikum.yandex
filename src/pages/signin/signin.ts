@@ -13,11 +13,11 @@ class SigninPage extends Block {
 		this.children.form = new Form({
 			formInputs: [
 				new InputGroup({
-					label: 'Username',
+					label: 'Login',
 					type: 'text',
 					id: 'login',
 					name: 'login',
-					placeholder: 'Enter your username',
+					placeholder: 'Enter your login',
 					validation: 'login',
 				}),
 				new InputGroup({

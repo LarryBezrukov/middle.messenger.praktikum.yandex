@@ -29,7 +29,7 @@ class Validator {
 	login(value: string): [boolean, string] {
 		return [
 			/(?!^\d+$)[A-Za-z0-9_-]{3,20}/.test(value),
-			'Login can contain only latin letters, number, "_" and "-"',
+			'This field can contain only latin letters, number, "_" and "-"',
 		];
 	}
 

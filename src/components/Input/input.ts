@@ -7,6 +7,7 @@ interface InputProps {
 	id: string;
 	name: string;
 	placeholder: string;
+	value?: string;
 	events: {
 		focus: (e: InputEvent) => void;
 		blur: (e: InputEvent) => void;

@@ -20,11 +20,11 @@ class SignupPage extends Block {
 					validation: 'email',
 				}),
 				new InputGroup({
-					label: 'Username',
+					label: 'Login',
 					type: 'text',
 					id: 'login',
 					name: 'login',
-					placeholder: 'Choose a username',
+					placeholder: 'Choose a login',
 					validation: 'login',
 				}),
 				new InputGroup({
