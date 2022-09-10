@@ -1,11 +1,11 @@
 import Block from '../../utils/Block';
-import template from './chat.pug';
 import store, { withStore } from '../../utils/Store';
 import ChatsController from '../../controllers/ChatsController';
 import WS from '../../utils/WS';
 import ChatList from '../../components/ChatList/chatList';
 import MessageArea from '../../components/MessageArea/messageArea';
 import Profile from '../../components/Profile/profile';
+import template from './chat.pug';
 import './chat.scss';
 
 class ChatPage extends Block {
