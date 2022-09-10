@@ -2,8 +2,8 @@
 
 .chat-list {
 	display: flex;
+	flex: 0 0 30rem;
 	flex-direction: column;
-	width: 30rem;
 	padding: 2.5rem 0;
 	margin-right: 2rem;
 	max-height: calc(100vh - 4rem);

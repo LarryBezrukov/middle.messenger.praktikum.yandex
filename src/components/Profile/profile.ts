@@ -26,8 +26,9 @@ class Profile extends Block {
 			action: this.openChangePasswordModal.bind(this),
 		});
 
-		this.children.LogoutLink = new Link({
+		this.children.LogoutButton = new Link({
 			text: 'Log out',
+			className: 'profile__logout-button',
 			action: () => AuthController.logOut(),
 		});
 
