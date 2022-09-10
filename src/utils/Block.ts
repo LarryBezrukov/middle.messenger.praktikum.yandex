@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 
-export default class Block {
+export default class Block<P extends object = any> {
 	static EVENTS = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
@@ -12,9 +12,7 @@ export default class Block {
 	public id = nanoid(6);
 
 	public _element: HTMLElement | null = null;
-
-	protected props: any;
-
+	protected props: P;
 	public children: Record<string, Block | Block[]>;
 
 	private eventBus: () => EventBus;
@@ -25,7 +23,7 @@ export default class Block {
 
 		this.children = children;
 
-		this.props = this._makePropsProxy(props);
+		this.props = this._makePropsProxy(props) as P;
 
 		this.initChildren();
 		this.eventBus = () => eventBus;

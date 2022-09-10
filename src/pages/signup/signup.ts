@@ -1,5 +1,6 @@
 import Block from '../../utils/Block';
 import AuthController, { ControllerSignUpData } from '../../controllers/AuthController';
+import { ValidationType } from '../../utils/Validator';
 import Form from '../../components/Form/form';
 import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
@@ -16,7 +17,7 @@ export default class SignupPage extends Block {
 					id: 'email',
 					name: 'email',
 					placeholder: 'mail@example.com',
-					validation: 'email',
+					validation: ValidationType.Email,
 				}),
 				new InputGroup({
 					label: 'Login',
@@ -24,7 +25,7 @@ export default class SignupPage extends Block {
 					id: 'login',
 					name: 'login',
 					placeholder: 'Choose a login',
-					validation: 'login',
+					validation: ValidationType.Login,
 				}),
 				new InputGroup({
 					label: 'First name',
@@ -32,7 +33,7 @@ export default class SignupPage extends Block {
 					id: 'first_name',
 					name: 'first_name',
 					placeholder: 'Enter your first name',
-					validation: 'name',
+					validation: ValidationType.Name,
 				}),
 				new InputGroup({
 					label: 'Last name',
@@ -40,7 +41,7 @@ export default class SignupPage extends Block {
 					id: 'second_name',
 					name: 'second_name',
 					placeholder: 'Enter your last name',
-					validation: 'name',
+					validation: ValidationType.Name,
 				}),
 				new InputGroup({
 					label: 'Phone number',
@@ -48,7 +49,7 @@ export default class SignupPage extends Block {
 					id: 'phone',
 					name: 'phone',
 					placeholder: '+7 (999) 999 99 99',
-					validation: 'phone',
+					validation: ValidationType.Phone,
 				}),
 				new InputGroup({
 					label: 'Password',
@@ -56,7 +57,7 @@ export default class SignupPage extends Block {
 					id: 'password',
 					name: 'password',
 					placeholder: '••••••••',
-					validation: 'password',
+					validation: ValidationType.Password,
 				}),
 				new InputGroup({
 					label: 'Repeat password',
@@ -64,7 +65,7 @@ export default class SignupPage extends Block {
 					id: 'confirm_password',
 					name: 'confirm_password',
 					placeholder: '••••••••',
-					validation: 'password',
+					validation: ValidationType.Password,
 				}),
 			],
 			formButton: new Button({

@@ -9,7 +9,7 @@ interface ChatProps extends ChatInterface {
 	};
 }
 
-class Chat extends Block {
+class Chat extends Block<ChatProps> {
 	constructor(props: ChatProps) {
 		super(props);
 	}
@@ -21,4 +21,4 @@ class Chat extends Block {
 
 const withMessages = withStore((state) => ({ currentChatId: state.currentChat?.id }));
 
-export default withMessages(Chat);
+export default withMessages(Chat as typeof Block);

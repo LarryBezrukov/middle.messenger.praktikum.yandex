@@ -22,14 +22,14 @@ class Validator {
 	name(value: string): [boolean, string] {
 		return [
 			/[A-ZА-Я][a-zа-я-]*/.test(value),
-			'This field can only contain latin or cyrillic letters, "-" and has to start with a capital',
+			'This field can only contain latin or cyrillic letters, «_» and has to start with a capital',
 		];
 	}
 
 	login(value: string): [boolean, string] {
 		return [
 			/(?!^\d+$)[A-Za-z0-9_-]{3,20}/.test(value),
-			'This field can contain only latin letters, number, "_" and "-"',
+			'This field can contain only latin letters, number, «_» and «-»',
 		];
 	}
 

@@ -1,6 +1,7 @@
 import ChatsController from '../../controllers/ChatsController';
 import Block from '../../utils/Block';
 import { withStore } from '../../utils/Store';
+import { ValidationType } from '../../utils/Validator';
 import Button from '../Button/button';
 import Form from '../Form/form';
 import InputGroup from '../InputGroup/inputGroup';
@@ -27,7 +28,7 @@ class MessageAreaHeader extends Block {
 							id: 'userId',
 							name: 'userId',
 							placeholder: 'Enter ID of the user to add',
-							validation: 'id',
+							validation: ValidationType.Id,
 						}),
 					],
 					formButton: new Button({

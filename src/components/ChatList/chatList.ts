@@ -1,6 +1,7 @@
 import Block from '../../utils/Block';
 import ChatsController from '../../controllers/ChatsController';
-import store, { ChatInterface, withStore } from '../../utils/Store';
+import store, { ChatInterface, UserInterface, withStore } from '../../utils/Store';
+import { ValidationType } from '../../utils/Validator';
 import WS from '../../utils/WS';
 import Link from '../Link/link';
 import Chat from '../Chat/chat';
@@ -11,7 +12,12 @@ import Button from '../Button/button';
 import template from './chatList.pug';
 import './chatList.scss';
 
-class ChatList extends Block {
+interface ChatListProps {
+	chats: ChatInterface[];
+	currentUser: UserInterface;
+}
+
+class ChatList extends Block<ChatListProps> {
 	protected initChildren() {
 		this.children.NewChatLink = new Link({
 			text: 'New chat',
@@ -41,7 +47,7 @@ class ChatList extends Block {
 							id: 'chatName',
 							name: 'chatName',
 							placeholder: 'Enter chat name',
-							validation: 'chatName',
+							validation: ValidationType.ChatName,
 						}),
 					],
 					formButton: new Button({
@@ -136,4 +142,4 @@ const withUserAndChats = withStore((state) => ({
 	currentUser: state.currentUser,
 }));
 
-export default withUserAndChats(ChatList);
+export default withUserAndChats(ChatList as typeof Block);

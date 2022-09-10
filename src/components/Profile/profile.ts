@@ -3,6 +3,7 @@ import AuthController from '../../controllers/AuthController';
 import UsersController from '../../controllers/UsersController';
 import { PasswordData, UserData } from '../../api/UsersAPI';
 import { withStore } from '../../utils/Store';
+import { ValidationType } from '../../utils/Validator';
 import ProfileHeader from '../ProfileHeader/profileHeader';
 import Link from '../Link/link';
 import Modal from '../Modal/modal';
@@ -43,7 +44,7 @@ class Profile extends Block {
 							id: 'email',
 							name: 'email',
 							placeholder: 'mail@example.com',
-							validation: 'email',
+							validation: ValidationType.Email,
 							value: this.props.email,
 						}),
 						new InputGroup({
@@ -52,7 +53,7 @@ class Profile extends Block {
 							id: 'login',
 							name: 'login',
 							placeholder: 'Choose a login',
-							validation: 'login',
+							validation: ValidationType.Login,
 							value: this.props.login,
 						}),
 						new InputGroup({
@@ -61,7 +62,7 @@ class Profile extends Block {
 							id: 'display_name',
 							name: 'display_name',
 							placeholder: 'Choose a display name',
-							validation: 'login',
+							validation: ValidationType.Login,
 							value: this.props.display_name,
 						}),
 						new InputGroup({
@@ -70,7 +71,7 @@ class Profile extends Block {
 							id: 'first_name',
 							name: 'first_name',
 							placeholder: 'Enter your first name',
-							validation: 'name',
+							validation: ValidationType.Name,
 							value: this.props.first_name,
 						}),
 						new InputGroup({
@@ -79,7 +80,7 @@ class Profile extends Block {
 							id: 'second_name',
 							name: 'second_name',
 							placeholder: 'Enter your last name',
-							validation: 'name',
+							validation: ValidationType.Name,
 							value: this.props.second_name,
 						}),
 						new InputGroup({
@@ -88,7 +89,7 @@ class Profile extends Block {
 							id: 'phone',
 							name: 'phone',
 							placeholder: '+7 (999) 999 99 99',
-							validation: 'phone',
+							validation: ValidationType.Phone,
 							value: this.props.phone,
 						}),
 					],
@@ -115,7 +116,7 @@ class Profile extends Block {
 							id: 'oldPassword',
 							name: 'oldPassword',
 							placeholder: '••••••••',
-							validation: 'password',
+							validation: ValidationType.Password,
 						}),
 						new InputGroup({
 							label: 'New password',
@@ -123,7 +124,7 @@ class Profile extends Block {
 							id: 'newPassword',
 							name: 'newPassword',
 							placeholder: '••••••••',
-							validation: 'password',
+							validation: ValidationType.Password,
 						}),
 						new InputGroup({
 							label: 'Repeat new password',
@@ -131,7 +132,7 @@ class Profile extends Block {
 							id: 'confirmPassword',
 							name: 'confirmPassword',
 							placeholder: '••••••••',
-							validation: 'password',
+							validation: ValidationType.Password,
 						}),
 					],
 					formButton: new Button({

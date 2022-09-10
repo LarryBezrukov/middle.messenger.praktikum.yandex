@@ -14,7 +14,7 @@ interface InputProps {
 	};
 }
 
-export default class Input extends Block {
+export default class Input extends Block<InputProps> {
 	constructor(props: InputProps) {
 		super(props);
 	}

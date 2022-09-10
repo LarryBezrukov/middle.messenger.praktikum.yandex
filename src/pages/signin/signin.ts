@@ -1,6 +1,7 @@
 import Block from '../../utils/Block';
 import AuthController from '../../controllers/AuthController';
 import { SignInData } from '../../api/AuthAPI';
+import { ValidationType } from '../../utils/Validator';
 import Form from '../../components/Form/form';
 import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
@@ -17,7 +18,7 @@ export default class SigninPage extends Block {
 					id: 'login',
 					name: 'login',
 					placeholder: 'Enter your login',
-					validation: 'login',
+					validation: ValidationType.Login,
 				}),
 				new InputGroup({
 					label: 'Password',
@@ -25,7 +26,7 @@ export default class SigninPage extends Block {
 					id: 'password',
 					name: 'password',
 					placeholder: '••••••••',
-					validation: 'password',
+					validation: ValidationType.Password,
 				}),
 			],
 			formButton: new Button({

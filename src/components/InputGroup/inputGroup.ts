@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import Validator from '../../utils/Validator';
+import Validator, { ValidationType } from '../../utils/Validator';
 import Input from '../Input/input';
 import InputError from '../InputError/inputError';
 import template from './inputGroup.pug';
@@ -11,11 +11,11 @@ interface InputGroupProps {
 	id: string;
 	name: string;
 	placeholder: string;
-	validation?: string;
+	validation: ValidationType;
 	value?: string;
 }
 
-export default class InputGroup extends Block {
+export default class InputGroup extends Block<InputGroupProps> {
 	protected initChildren() {
 		this.children.input = new Input({
 			...this.props,

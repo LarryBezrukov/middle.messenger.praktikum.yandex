@@ -1,8 +1,6 @@
 @import '../../styles/theme.scss';
 
-.input {
-	&__error {
-		font-size: 12px;
-		color: $color-red;
-	}
+.input__error {
+	font-size: 12px;
+	color: $color-red;
 }

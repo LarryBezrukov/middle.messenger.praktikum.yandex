@@ -1,9 +1,9 @@
 import Block from '../../utils/Block';
 import { MessageInterface, withStore } from '../../utils/Store';
 import { formatTime } from '../../utils/helpers';
-import Message from '../Message/message';
-import MessageInputGroup from '../MessageInputGroup/messageInputGroup';
 import MessageAreaHeader from '../MessageAreaHeader/messageAreaHeader';
+import MessageInputGroup from '../MessageInputGroup/messageInputGroup';
+import Message from '../Message/message';
 import template from './messageArea.pug';
 import './messageArea.scss';
 
@@ -14,7 +14,6 @@ interface MessageAreaProps {
 class MessageArea extends Block {
 	protected initChildren() {
 		this.children.MessageAreaHeader = new MessageAreaHeader();
-
 		this.children.MessageInput = new MessageInputGroup();
 	}
 
