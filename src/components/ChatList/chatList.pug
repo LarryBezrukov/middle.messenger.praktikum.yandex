@@ -1,7 +1,9 @@
 .chat-list
 	.chat-list__header
-		h1.heading Inbox
-		!= NewChatLink
+		h1.chat-list__heading Inbox
+		.chat-list__links
+			!= NewChatLink
+			!= OpenProfileLink
 	input.chat-list__search(type='text', placeholder='Search chats...')
 	.chat-list__chats
 		if Chats

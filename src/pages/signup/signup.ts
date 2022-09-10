@@ -1,13 +1,12 @@
 import Block from '../../utils/Block';
-import template from './signup.pug';
+import AuthController, { ControllerSignUpData } from '../../controllers/AuthController';
+import Form from '../../components/Form/form';
 import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
-import Form from '../../components/Form/form';
 import Link from '../../components/Link/link';
-import AuthController, { ControllerSignUpData } from '../../controllers/AuthController';
-import { withUser } from '../profile/profile';
+import template from './signup.pug';
 
-class SignupPage extends Block {
+export default class SignupPage extends Block {
 	protected initChildren() {
 		this.children.form = new Form({
 			formInputs: [
@@ -90,6 +89,8 @@ class SignupPage extends Block {
 		const formData = new FormData(e.target as HTMLFormElement);
 		const data = Object.fromEntries(formData.entries());
 
+		const formEl = e.target as HTMLFormElement;
+
 		const form = this.children.form as Block;
 		const formInputs = form.children.formInputs as Block[];
 
@@ -98,11 +99,11 @@ class SignupPage extends Block {
 		});
 
 		await AuthController.signUp(data as unknown as ControllerSignUpData);
+
+		formEl.reset();
 	}
 
 	render() {
 		return this.compile(template, {});
 	}
 }
-
-export default withUser(SignupPage);

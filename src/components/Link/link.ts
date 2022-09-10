@@ -5,6 +5,7 @@ import './link.scss';
 
 interface LinkProps extends WithRouterProps {
 	text: string;
+	className?: string;
 	to?: string;
 	action?: () => void;
 }

@@ -13,6 +13,6 @@ class ProfileHeader extends Block {
 	}
 }
 
-export const withUser = withStore((state) => ({ ...state.currentUser }));
+const withUser = withStore((state) => ({ ...state.currentUser }));
 
 export default withUser(ProfileHeader);

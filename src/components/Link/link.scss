@@ -2,5 +2,6 @@
 
 .link {
 	color: rgba($color-primary, 0.8);
+	user-select: none;
 	cursor: pointer;
 }

@@ -14,16 +14,10 @@
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 2rem;
+	}
 
-		.heading {
-			margin-right: 2rem;
-		}
-
-		.new-message-indicator {
-			background-color: rgba($color-primary, 0.2);
-			padding: 0.4rem 1.2rem;
-			border-radius: 0.4rem;
-		}
+	&__newchat-link {
+		margin-right: 2.5rem;
 	}
 
 	&__search {

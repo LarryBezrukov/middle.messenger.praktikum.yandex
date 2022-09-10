@@ -207,7 +207,12 @@ class Profile extends Block {
 		const formData = new FormData(e.target as HTMLFormElement);
 		const data = Object.fromEntries(formData.entries());
 
+		const form = e.target as HTMLFormElement;
+
 		await UsersController.changePassword(data as unknown as PasswordData);
+
+		this.closeChangePasswordModal();
+		form.reset();
 	}
 
 	render() {
@@ -215,6 +220,6 @@ class Profile extends Block {
 	}
 }
 
-export const withUser = withStore((state) => ({ ...state.currentUser }));
+const withUser = withStore((state) => ({ ...state.currentUser }));
 
 export default withUser(Profile);

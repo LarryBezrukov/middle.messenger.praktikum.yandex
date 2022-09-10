@@ -49,16 +49,11 @@ interface LastMessageInterface {
 	content: string;
 }
 
-interface ButtonInterface {
-	disabled: boolean;
-}
-
 interface StoreData {
 	currentUser?: UserInterface;
 	chats?: ChatInterface[];
 	currentChat?: CurrentChatInterface;
-	button?: ButtonInterface;
-	addUserModal?: {
+	profilePanel?: {
 		isOpen: true | false;
 	};
 }

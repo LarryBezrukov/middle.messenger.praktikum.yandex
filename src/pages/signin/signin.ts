@@ -1,14 +1,13 @@
 import Block from '../../utils/Block';
-import template from './signin.pug';
+import AuthController from '../../controllers/AuthController';
+import { SignInData } from '../../api/AuthAPI';
 import Form from '../../components/Form/form';
 import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
 import Link from '../../components/Link/link';
-import AuthController from '../../controllers/AuthController';
-import { SignInData } from '../../api/AuthAPI';
-import { withUser } from '../profile/profile';
+import template from './signin.pug';
 
-class SigninPage extends Block {
+export default class SigninPage extends Block {
 	protected initChildren() {
 		this.children.form = new Form({
 			formInputs: [
@@ -51,6 +50,8 @@ class SigninPage extends Block {
 		const formData = new FormData(e.target as HTMLFormElement);
 		const data = Object.fromEntries(formData.entries());
 
+		const formEl = e.target as HTMLFormElement;
+
 		const form = this.children.form as Block;
 		const formInputs = form.children.formInputs as Block[];
 
@@ -59,11 +60,11 @@ class SigninPage extends Block {
 		});
 
 		await AuthController.signIn(data as unknown as SignInData);
+
+		formEl.reset();
 	}
 
 	render() {
 		return this.compile(template, {});
 	}
 }
-
-export default withUser(SigninPage);

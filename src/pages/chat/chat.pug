@@ -1,4 +1,6 @@
 .chat-container
 	!= ChatList
 	!= MessageArea
-	!= Profile
+
+	if profilePanel && profilePanel.isOpen
+		!= Profile

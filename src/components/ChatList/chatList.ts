@@ -15,7 +15,19 @@ class ChatList extends Block {
 	protected initChildren() {
 		this.children.NewChatLink = new Link({
 			text: 'New chat',
+			className: 'chat-list__newchat-link',
 			action: this.openNewChatModal.bind(this),
+		});
+
+		this.children.OpenProfileLink = new Link({
+			text: 'Profile',
+			action: () =>
+				store.set(
+					'profilePanel.isOpen',
+					store.getState().profilePanel === undefined
+						? true
+						: !store.getState().profilePanel!.isOpen,
+				),
 		});
 
 		this.children.NewChatModal = new Modal({

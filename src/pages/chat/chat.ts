@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './chat.pug';
-import store from '../../utils/Store';
+import store, { withStore } from '../../utils/Store';
 import ChatsController from '../../controllers/ChatsController';
 import WS from '../../utils/WS';
 import ChatList from '../../components/ChatList/chatList';
@@ -37,4 +37,6 @@ class ChatPage extends Block {
 	}
 }
 
-export default ChatPage;
+const withProfilePanel = withStore((state) => ({ profilePanel: state.profilePanel }));
+
+export default withProfilePanel(ChatPage);
