@@ -14,7 +14,7 @@
 	},
 	"scripts": {
 		"dev": "parcel src/index.html --no-cache",
-		"build": "parcel build src/index.html --no-cache --no-optimize --no-scope-hoist",
+		"build": "parcel build src/index.html --no-cache",
 		"start": "npm run build && nodemon app.js",
 		"lint": "eslint src/**/*.ts",
 		"lint:fix": "eslint --fix 'src/**/*.ts'",
@@ -42,6 +42,7 @@
 		"mocha": "10.0.0",
 		"nodemon": "2.0.18",
 		"parcel": "2.6.2",
+		"parcel-reporter-static-files-copy": "1.4.0",
 		"parcel-transformer-pug-precompile": "1.0.6",
 		"prettier": "2.7.1",
 		"stylelint": "14.9.1",
