@@ -1,0 +1,9 @@
+.message(class=className)
+	.message__info
+		.message__author
+			if display_name
+				= display_name
+			else
+				= first_name
+		.message__time= time
+	.message__bubble= content

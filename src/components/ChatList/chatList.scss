@@ -1,23 +1,23 @@
 @import '../../styles/theme.scss';
 
 .chat-list {
-	width: 30rem;
+	display: flex;
+	flex: 0 0 30rem;
+	flex-direction: column;
 	padding: 2.5rem 0;
 	margin-right: 2rem;
+	max-height: calc(100vh - 4rem);
+	overflow: hidden;
 
 	&__header {
 		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		margin-bottom: 2rem;
+	}
 
-		.heading {
-			margin-right: 2rem;
-		}
-
-		.new-message-indicator {
-			background-color: rgba($color-primary, 0.2);
-			padding: 0.4rem 1.2rem;
-			border-radius: 0.4rem;
-		}
+	&__newchat-link {
+		margin-right: 2.5rem;
 	}
 
 	&__search {
@@ -27,5 +27,9 @@
 		padding: 1.5rem;
 		width: 100%;
 		margin-bottom: 2rem;
+	}
+
+	&__chats {
+		overflow-y: auto;
 	}
 }

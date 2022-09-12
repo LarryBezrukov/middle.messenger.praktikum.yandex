@@ -1,0 +1,25 @@
+@import '../../styles/theme.scss';
+
+.chat {
+	display: flex;
+	padding: 2rem;
+	border-radius: 1.2rem;
+	cursor: pointer;
+
+	&_selected {
+		background-color: $color-primary;
+		color: $color-white;
+	}
+
+	&__profile-picture {
+		background-color: $background-color-dark;
+		width: 5.5rem;
+		height: 5.5rem;
+		border-radius: 100%;
+		margin-right: 1.5rem;
+	}
+
+	&__content {
+		align-self: center;
+	}
+}

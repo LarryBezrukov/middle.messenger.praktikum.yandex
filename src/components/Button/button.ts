@@ -4,14 +4,15 @@ import './button.scss';
 
 interface ButtonProps {
 	label: string;
-	classes: string | string[];
 	type: string;
+	classes?: string;
+	disabled?: boolean;
 	events?: {
 		click: () => void;
 	};
 }
 
-export class Button extends Block {
+export default class Button extends Block<ButtonProps> {
 	constructor(props: ButtonProps) {
 		super(props);
 	}

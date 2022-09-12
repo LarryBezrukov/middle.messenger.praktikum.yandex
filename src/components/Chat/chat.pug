@@ -1,0 +1,6 @@
+.chat(class=currentChatId === id ? 'chat_selected' : '')
+	.chat__profile-picture
+	.chat__content 
+		div= title
+		if last_message
+			div Last message: #{ last_message.user.first_name }

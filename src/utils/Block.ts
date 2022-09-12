@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 
-export default class Block {
+export default class Block<P extends object = any> {
 	static EVENTS = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
@@ -12,10 +12,8 @@ export default class Block {
 	public id = nanoid(6);
 
 	public _element: HTMLElement | null = null;
-
-	protected props: any;
-
-	public children: Record<string, Block>;
+	protected props: P;
+	public children: Record<string, Block | Block[]>;
 
 	private eventBus: () => EventBus;
 
@@ -25,7 +23,7 @@ export default class Block {
 
 		this.children = children;
 
-		this.props = this._makePropsProxy(props);
+		this.props = this._makePropsProxy(props) as P;
 
 		this.initChildren();
 		this.eventBus = () => eventBus;
@@ -124,25 +122,23 @@ export default class Block {
 		return this.element;
 	}
 
-	private _makePropsProxy = (props: any) => {
-		const self = this;
-
+	private _makePropsProxy(props: any) {
 		return new Proxy(props as unknown as object, {
-			get(target: Record<string, unknown>, prop: string) {
+			get: (target: Record<string, unknown>, prop: string) => {
 				const value = target[prop];
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
-			set(target: Record<string, unknown>, prop: string, value: unknown) {
+			set: (target: Record<string, unknown>, prop: string, value: unknown) => {
 				target[prop] = value;
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+				this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
 
 				return true;
 			},
-			deleteProperty() {
+			deleteProperty: () => {
 				throw new Error('Нет доступа');
 			},
 		});
-	};
+	}
 
 	private _removeEvents() {
 		const { events } = this.props as any;

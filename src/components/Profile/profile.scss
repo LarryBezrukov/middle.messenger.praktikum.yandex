@@ -1,0 +1,39 @@
+@import '../../styles/theme.scss';
+
+.profile {
+	display: flex;
+	flex: 0 0 40rem;
+	flex-direction: column;
+	background-color: $color-white;
+	border-radius: 1.2rem;
+	padding: 8rem 2.5rem 4rem 2.5rem;
+	align-items: center;
+	margin-left: 2rem;
+
+	&__info {
+		width: 100%;
+		margin-bottom: 8rem;
+		justify-self: stretch;
+	}
+
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+	}
+
+	&__value {
+		color: $font-color-secondary;
+	}
+
+	&__buttons {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		margin-top: auto;
+	}
+
+	&__logout-button {
+		color: $color-red;
+	}
+}

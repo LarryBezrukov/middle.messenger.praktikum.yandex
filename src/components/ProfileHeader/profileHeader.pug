@@ -1,0 +1,9 @@
+.profile-header
+	.profile-header__avatar
+		if avatar
+			img.profile-header__avatar-image(src=avatar)
+		else
+			.profile-header__avatar-placeholder
+	.profile-header__user
+		.profile-header__user-name #{ first_name } #{ second_name }
+		.profile-header__user-email= email

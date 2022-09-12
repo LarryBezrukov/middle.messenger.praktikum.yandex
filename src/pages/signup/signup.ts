@@ -1,9 +1,11 @@
 import Block from '../../utils/Block';
+import AuthController, { ControllerSignUpData } from '../../controllers/AuthController';
+import { ValidationType } from '../../utils/Validator';
+import Form from '../../components/Form/form';
+import InputGroup from '../../components/InputGroup/inputGroup';
+import Button from '../../components/Button/button';
+import Link from '../../components/Link/link';
 import template from './signup.pug';
-import { InputGroup } from '../../components/InputGroup/inputGroup';
-import { Button } from '../../components/Button/button';
-import { Form } from '../../components/Form/form';
-import './signup.scss';
 
 export default class SignupPage extends Block {
 	protected initChildren() {
@@ -15,31 +17,31 @@ export default class SignupPage extends Block {
 					id: 'email',
 					name: 'email',
 					placeholder: 'mail@example.com',
-					validation: 'email',
+					validation: ValidationType.Email,
 				}),
 				new InputGroup({
-					label: 'Username',
+					label: 'Login',
 					type: 'text',
 					id: 'login',
 					name: 'login',
-					placeholder: 'Choose a username',
-					validation: 'login',
+					placeholder: 'Choose a login',
+					validation: ValidationType.Login,
 				}),
 				new InputGroup({
 					label: 'First name',
 					type: 'text',
-					id: 'fist_name',
-					name: 'fist_name',
+					id: 'first_name',
+					name: 'first_name',
 					placeholder: 'Enter your first name',
-					validation: 'name',
+					validation: ValidationType.Name,
 				}),
 				new InputGroup({
 					label: 'Last name',
 					type: 'text',
-					id: 'last_name',
-					name: 'last_name',
+					id: 'second_name',
+					name: 'second_name',
 					placeholder: 'Enter your last name',
-					validation: 'name',
+					validation: ValidationType.Name,
 				}),
 				new InputGroup({
 					label: 'Phone number',
@@ -47,7 +49,7 @@ export default class SignupPage extends Block {
 					id: 'phone',
 					name: 'phone',
 					placeholder: '+7 (999) 999 99 99',
-					validation: 'phone',
+					validation: ValidationType.Phone,
 				}),
 				new InputGroup({
 					label: 'Password',
@@ -55,15 +57,15 @@ export default class SignupPage extends Block {
 					id: 'password',
 					name: 'password',
 					placeholder: '••••••••',
-					validation: 'password',
+					validation: ValidationType.Password,
 				}),
 				new InputGroup({
 					label: 'Repeat password',
 					type: 'password',
-					id: 'repreat_password',
-					name: 'repeat_password',
+					id: 'confirm_password',
+					name: 'confirm_password',
 					placeholder: '••••••••',
-					validation: 'password',
+					validation: ValidationType.Password,
 				}),
 			],
 			formButton: new Button({
@@ -75,21 +77,30 @@ export default class SignupPage extends Block {
 				submit: this.formSubmitHandler.bind(this),
 			},
 		});
+
+		this.children.link = new Link({
+			text: 'Already a user?',
+			to: '/signin',
+		});
 	}
 
-	formSubmitHandler(e: InputEvent) {
+	async formSubmitHandler(e: SubmitEvent) {
 		e.preventDefault();
 
-		const data = new FormData(e.target as HTMLFormElement);
-		const value = Object.fromEntries(data.entries());
-		// eslint-disable-next-line no-console
-		console.log(value);
+		const formEl = e.target as HTMLFormElement;
+		const formData = new FormData(formEl);
+		const data = Object.fromEntries(formData.entries());
 
-		const { formInputs } = this.children.form.children as unknown as Record<string, Block[]>;
+		const form = this.children.form as Block;
+		const formInputs = form.children.formInputs as Block[];
 
 		formInputs.forEach((input: InputGroup) => {
 			input.validateInput();
 		});
+
+		await AuthController.signUp(data as unknown as ControllerSignUpData);
+
+		formEl.reset();
 	}
 
 	render() {

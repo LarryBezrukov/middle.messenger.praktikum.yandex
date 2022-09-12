@@ -1,0 +1,10 @@
+@import '../../styles/theme.scss';
+
+.message-area-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 8rem;
+	padding: 2.5rem;
+	border-bottom: 1px solid $border-color;
+}

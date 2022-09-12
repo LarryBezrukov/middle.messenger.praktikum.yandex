@@ -1,6 +1,14 @@
 {
-  "extends": ["@parcel/config-default"],
-  "transformers": {
-    "*.pug": ["parcel-transformer-pug-precompile"]
-  }
+	"extends": [
+		"@parcel/config-default"
+	],
+	"transformers": {
+		"*.pug": [
+			"parcel-transformer-pug-precompile"
+		]
+	},
+	"reporters": [
+		"...",
+		"parcel-reporter-static-files-copy"
+	]
 }

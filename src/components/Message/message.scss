@@ -1,0 +1,57 @@
+@import '../../styles/theme.scss';
+
+.message {
+	display: flex;
+	flex-direction: column;
+	margin: 1.5rem 0;
+	max-width: 60%;
+
+	&_outgoing {
+		align-self: flex-end;
+
+		& > .message__info {
+			flex-direction: row-reverse;
+			justify-content: end;
+		}
+
+		& > .message__bubble {
+			background-color: $color-primary;
+			color: $color-white;
+			border-radius: 2rem 0.3rem 2rem 2rem;
+		}
+	}
+
+	&_incoming {
+		align-self: flex-start;
+
+		& > .message__info {
+			justify-content: start;
+		}
+
+		& > .message__bubble {
+			background-color: rgba($color-primary, 0.1);
+			color: $color-black;
+			border-radius: 0.3rem 2rem 2rem 2rem;
+		}
+	}
+
+	&__info {
+		display: flex;
+		font-size: 1.3rem;
+		margin-bottom: 0.5rem;
+	}
+
+	&__author {
+		font-weight: 500;
+		margin: 0 0.5rem;
+	}
+
+	&__time {
+		color: $font-color-secondary;
+		margin: 0 0.5rem;
+	}
+
+	&__bubble {
+		padding: 2rem;
+	}
+}

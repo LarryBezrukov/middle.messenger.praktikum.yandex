@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
-import Validator from '../../utils/Validator';
-import { Input } from '../Input/input';
-import { InputError } from '../InputError/inputError';
+import Validator, { ValidationType } from '../../utils/Validator';
+import Input from '../Input/input';
+import InputError from '../InputError/inputError';
 import template from './inputGroup.pug';
 import './inputGroup.scss';
 
@@ -10,19 +10,15 @@ interface InputGroupProps {
 	type: string;
 	id: string;
 	name: string;
-	placeholder: string;
-	validation: string;
+	placeholder?: string;
+	validation?: ValidationType;
+	value?: string;
 }
 
-export class InputGroup extends Block {
+export default class InputGroup extends Block<InputGroupProps> {
 	protected initChildren() {
-		const { type, id, name, placeholder } = this.props;
-
 		this.children.input = new Input({
-			type,
-			id,
-			name,
-			placeholder,
+			...this.props,
 			events: {
 				focus: this.validateInput.bind(this),
 				blur: this.validateInput.bind(this),
@@ -39,11 +35,13 @@ export class InputGroup extends Block {
 	}
 
 	validateInput() {
-		const { value } = this.children.input._element as HTMLInputElement;
+		const input = this.children.input as Block;
+		const error = this.children.error as Block;
+		const { value } = input._element as HTMLInputElement;
 
-		const [isValid, message] = Validator.validate(this.props.validation, value);
+		const [isValid, message] = Validator.validate(this.props.validation!, value);
 
-		this.children.error.setProps({
+		error.setProps({
 			errorText: isValid ? '' : message,
 		});
 	}
