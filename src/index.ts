@@ -22,7 +22,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 		router.go('/chat');
 	} catch (e) {
 		console.log('Error fetching user', e);
-		router.go('/signin');
+
+		if (window.location.pathname !== '/chat' && window.location.pathname !== '/') {
+			router.go(window.location.pathname);
+		} else {
+			router.go('/signin');
+		}
 	}
 
 	router.start();
