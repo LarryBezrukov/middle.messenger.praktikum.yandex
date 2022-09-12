@@ -1,5 +1,6 @@
 import UsersAPI, { PasswordData, UserData } from '../api/UsersAPI';
 import store from '../utils/Store';
+import AuthController from './AuthController';
 
 class UsersController {
 	private api: UsersAPI;
@@ -9,9 +10,9 @@ class UsersController {
 	}
 
 	async changeProfile(data: UserData) {
-		const response = await this.api.changeProfile(data);
+		await this.api.changeProfile(data);
 
-		store.set('currentUser', response);
+		AuthController.fetchUser();
 	}
 
 	async changePassword(data: PasswordData) {
@@ -22,6 +23,12 @@ class UsersController {
 		}
 
 		await this.api.changePassword(data);
+	}
+
+	async changeAvatar(data: FormData) {
+		await this.api.changeAvatar(data);
+
+		AuthController.fetchUser();
 	}
 }
 

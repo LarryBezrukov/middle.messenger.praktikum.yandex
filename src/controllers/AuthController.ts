@@ -63,7 +63,9 @@ class AuthController {
 		const user = await this.api.request();
 		await ChatsController.getChats();
 
-		store.set('currentUser', user);
+		const userWithAvatar = { ...user, avatar: `${process.env.ENDPOINT}/resources${user.avatar}` };
+
+		store.set('currentUser', user.avatar ? userWithAvatar : user);
 	}
 }
 

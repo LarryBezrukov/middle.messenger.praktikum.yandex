@@ -87,10 +87,9 @@ export default class SignupPage extends Block {
 	async formSubmitHandler(e: SubmitEvent) {
 		e.preventDefault();
 
-		const formData = new FormData(e.target as HTMLFormElement);
-		const data = Object.fromEntries(formData.entries());
-
 		const formEl = e.target as HTMLFormElement;
+		const formData = new FormData(formEl);
+		const data = Object.fromEntries(formData.entries());
 
 		const form = this.children.form as Block;
 		const formInputs = form.children.formInputs as Block[];

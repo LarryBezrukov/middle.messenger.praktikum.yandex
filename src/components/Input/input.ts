@@ -6,7 +6,7 @@ interface InputProps {
 	type: string;
 	id: string;
 	name: string;
-	placeholder: string;
+	placeholder?: string;
 	value?: string;
 	events: {
 		focus: (e: InputEvent) => void;

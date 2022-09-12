@@ -11,7 +11,7 @@ type Options = {
 };
 
 export default class HTTPTransport {
-	static API_URL = 'https://ya-praktikum.tech/api/v2';
+	static API_URL = process.env.ENDPOINT;
 	protected endpoint: string;
 
 	constructor(endpoint: string) {
@@ -67,14 +67,15 @@ export default class HTTPTransport {
 			xhr.onerror = () => reject;
 			xhr.ontimeout = () => reject;
 
-			xhr.setRequestHeader('Content-Type', 'application/json');
-
 			xhr.withCredentials = true;
 			xhr.responseType = 'json';
 
 			if (method === Method.GET || !data) {
 				xhr.send();
+			} else if (data instanceof FormData) {
+				xhr.send(data);
 			} else {
+				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.send(JSON.stringify(data));
 			}
 		});

@@ -46,7 +46,7 @@ class MessageArea extends Block {
 
 const withMessages = withStore((state) => ({
 	...state.currentChat,
-	currentUser: state.currentUser,
+	currentUser: { ...state.currentUser },
 }));
 
 export default withMessages(MessageArea);

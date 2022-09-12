@@ -13,6 +13,17 @@ import Button from '../Button/button';
 import template from './profile.pug';
 import './profile.scss';
 
+interface ProfileData {
+	id: number;
+	first_name: string;
+	second_name: string;
+	display_name: string | null;
+	login: string;
+	email: string;
+	phone: string;
+	avatar: File;
+}
+
 class Profile extends Block {
 	protected initChildren() {
 		this.children.ProfileHeader = new ProfileHeader();
@@ -38,6 +49,13 @@ class Profile extends Block {
 				new ProfileHeader(),
 				new Form({
 					formInputs: [
+						new InputGroup({
+							label: 'Avatar',
+							type: 'file',
+							id: 'avatar',
+							name: 'avatar',
+							validation: ValidationType.Image,
+						}),
 						new InputGroup({
 							label: 'Email',
 							type: 'email',
@@ -195,21 +213,28 @@ class Profile extends Block {
 	async editProfile(e: SubmitEvent) {
 		e.preventDefault();
 
-		const formData = new FormData(e.target as HTMLFormElement);
-		const data = Object.fromEntries(formData.entries());
+		const form = e.target as HTMLFormElement;
+		const formData = new FormData(form);
+		const data = Object.fromEntries(formData.entries()) as unknown as ProfileData;
+
+		const avatarInput = form.querySelector('input#avatar') as HTMLInputElement;
+
+		if (data.avatar.size) {
+			await UsersController.changeAvatar(formData);
+		}
 
 		await UsersController.changeProfile(data as unknown as UserData);
 
 		this.closeEditProfileModal();
+		avatarInput.value = '';
 	}
 
 	async changePassword(e: SubmitEvent) {
 		e.preventDefault();
 
-		const formData = new FormData(e.target as HTMLFormElement);
-		const data = Object.fromEntries(formData.entries());
-
 		const form = e.target as HTMLFormElement;
+		const formData = new FormData(form);
+		const data = Object.fromEntries(formData.entries());
 
 		await UsersController.changePassword(data as unknown as PasswordData);
 

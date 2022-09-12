@@ -10,8 +10,8 @@ interface InputGroupProps {
 	type: string;
 	id: string;
 	name: string;
-	placeholder: string;
-	validation: ValidationType;
+	placeholder?: string;
+	validation?: ValidationType;
 	value?: string;
 }
 
@@ -39,7 +39,7 @@ export default class InputGroup extends Block<InputGroupProps> {
 		const error = this.children.error as Block;
 		const { value } = input._element as HTMLInputElement;
 
-		const [isValid, message] = Validator.validate(this.props.validation, value);
+		const [isValid, message] = Validator.validate(this.props.validation!, value);
 
 		error.setProps({
 			errorText: isValid ? '' : message,

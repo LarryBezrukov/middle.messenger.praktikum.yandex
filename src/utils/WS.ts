@@ -45,7 +45,7 @@ class WS {
 	private keepAlive() {
 		const intervalTime = 20000;
 
-		this.keepAliveIntervalId = setInterval(() => {
+		this.keepAliveIntervalId = window.setInterval(() => {
 			if (this.socket.readyState === this.socket.OPEN) {
 				this.send({
 					type: 'ping',

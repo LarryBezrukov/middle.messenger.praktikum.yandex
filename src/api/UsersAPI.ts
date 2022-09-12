@@ -1,3 +1,4 @@
+import { UserInterface } from '../utils/Store';
 import BaseAPI from './BaseAPI';
 
 export interface UserData {
@@ -20,12 +21,16 @@ export default class UsersAPI extends BaseAPI {
 		super('/user');
 	}
 
-	changeProfile(data: UserData): Promise<unknown> {
+	changeProfile(data: UserData): Promise<UserInterface> {
 		return this.http.put('/profile', data);
 	}
 
-	changePassword(data: PasswordData): Promise<unknown> {
+	changePassword(data: PasswordData): Promise<PasswordData> {
 		return this.http.put('/password', data);
+	}
+
+	changeAvatar(data: FormData): Promise<UserInterface> {
+		return this.http.put('/profile/avatar', data);
 	}
 
 	request = undefined;

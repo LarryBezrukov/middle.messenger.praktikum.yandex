@@ -139,7 +139,7 @@ class ChatList extends Block<ChatListProps> {
 
 const withUserAndChats = withStore((state) => ({
 	chats: state.chats,
-	currentUser: state.currentUser,
+	currentUser: { ...state.currentUser },
 }));
 
 export default withUserAndChats(ChatList as typeof Block);

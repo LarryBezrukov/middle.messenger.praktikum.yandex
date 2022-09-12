@@ -14,24 +14,35 @@ export interface SignInData {
 	password: string;
 }
 
+export interface UserData {
+	id: number;
+	first_name: string;
+	second_name: string;
+	display_name: string;
+	login: string;
+	avatar: string;
+	email: string;
+	phone: string;
+}
+
 export default class AuthAPI extends BaseAPI {
 	constructor() {
 		super('/auth');
 	}
 
-	signup(data: SignUpData): Promise<unknown> {
+	signup(data: SignUpData): Promise<SignUpData> {
 		return this.http.post('/signup', data);
 	}
 
-	signin(data: SignInData): Promise<unknown> {
+	signin(data: SignInData): Promise<SignInData> {
 		return this.http.post('/signin', data);
 	}
 
-	logout(): Promise<unknown> {
+	logout(): Promise<void> {
 		return this.http.post('/logout');
 	}
 
-	request(): Promise<unknown> {
+	request(): Promise<UserData> {
 		return this.http.get('/user');
 	}
 
