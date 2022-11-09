@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './inputError.pug';
-// import './inputError.scss';
+import './inputError.scss';
 
 interface InputErrorProps {
 	errorText: string;

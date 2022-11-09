@@ -10,7 +10,7 @@ import Form from '../Form/form';
 import InputGroup from '../InputGroup/inputGroup';
 import Button from '../Button/button';
 import template from './chatList.pug';
-// import './chatList.scss';
+import './chatList.scss';
 
 interface ChatListProps {
 	chats: ChatInterface[];

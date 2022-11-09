@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './messageInput.pug';
-// import './messageInput.scss';
+import './messageInput.scss';
 
 export default class MessageInput extends Block {
 	constructor() {

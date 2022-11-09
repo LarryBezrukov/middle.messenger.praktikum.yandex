@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import { ChatInterface, withStore } from '../../utils/Store';
 import template from './chat.pug';
-// import './chat.scss';
+import './chat.scss';
 
 interface ChatProps extends ChatInterface {
 	events: {

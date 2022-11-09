@@ -1,7 +1,7 @@
 import template from '@components/profileHeader/profileHeader.pug';
 import Block from '../../utils/Block';
 import { withStore } from '../../utils/Store';
-// import './profileHeader.scss';
+import './profileHeader.scss';
 
 class ProfileHeader extends Block {
 	constructor(props: any) {

@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './form.pug';
-// import './form.scss';
+import './form.scss';
 
 interface FormProps {
 	formInputs: Block[];

@@ -11,7 +11,7 @@ import Form from '../Form/form';
 import InputGroup from '../InputGroup/inputGroup';
 import Button from '../Button/button';
 import template from './profile.pug';
-// import './profile.scss';
+import './profile.scss';
 
 interface ProfileData {
 	id: number;

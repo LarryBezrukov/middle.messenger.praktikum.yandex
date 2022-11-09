@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import { withRouter, WithRouterProps } from '../../utils/Router';
 import template from './link.pug';
-// import './link.scss';
+import './link.scss';
 
 interface LinkProps extends WithRouterProps {
 	text: string;

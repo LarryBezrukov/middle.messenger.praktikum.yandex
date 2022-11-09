@@ -5,7 +5,7 @@ import MessageAreaHeader from '../MessageAreaHeader/messageAreaHeader';
 import MessageInputGroup from '../MessageInputGroup/messageInputGroup';
 import Message from '../Message/message';
 import template from './messageArea.pug';
-// import './messageArea.scss';
+import './messageArea.scss';
 
 interface MessageAreaProps {
 	userId: number;

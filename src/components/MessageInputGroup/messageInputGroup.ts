@@ -2,7 +2,7 @@ import Block from '../../utils/Block';
 import template from './messageInputGroup.pug';
 import WS from '../../utils/WS';
 import MessageInput from '../MessageInput/messageInput';
-// import './messageInputGroup.scss';
+import './messageInputGroup.scss';
 
 export default class MessageInputGroup extends Block {
 	protected initChildren() {
