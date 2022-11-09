@@ -1,5 +1,5 @@
 {
-	"name": "my-webpack-project",
+	"name": "messenger",
 	"version": "1.0.0",
 	"engines": {
 		"node": ">=16",
@@ -27,8 +27,6 @@
 	"author": "Illarion Bezrukov",
 	"license": "ISC",
 	"devDependencies": {
-		"@parcel/transformer-css": "2.7.0",
-		"@parcel/transformer-sass": "2.6.2",
 		"@prettier/plugin-pug": "2.1.1",
 		"@types/chai": "4.3.3",
 		"@types/mocha": "9.1.1",
@@ -51,12 +49,8 @@
 		"html-webpack-plugin": "5.5.0",
 		"mocha": "10.0.0",
 		"nodemon": "2.0.18",
-		"parcel": "2.6.2",
-		"parcel-reporter-static-files-copy": "1.4.0",
-		"parcel-transformer-pug-precompile": "1.0.6",
 		"prettier": "2.7.1",
 		"pug": "3.0.2",
-		"pug-plugin": "4.5.0",
 		"sass": "1.56.0",
 		"sass-loader": "13.1.0",
 		"style-loader": "3.3.1",
