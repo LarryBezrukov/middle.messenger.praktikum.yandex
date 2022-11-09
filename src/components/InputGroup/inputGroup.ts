@@ -3,7 +3,7 @@ import Validator, { ValidationType } from '../../utils/Validator';
 import Input from '../Input/input';
 import InputError from '../InputError/inputError';
 import template from './inputGroup.pug';
-import './inputGroup.scss';
+// import './inputGroup.scss';
 
 interface InputGroupProps {
 	label: string;

@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './error.pug';
-import './error.scss';
+// import './error.scss';
 
 interface ErrorProps {
 	errorCode: number;

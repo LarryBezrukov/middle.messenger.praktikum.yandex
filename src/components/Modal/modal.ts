@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './modal.pug';
-import './modal.scss';
+// import './modal.scss';
 
 interface ModalProps {
 	title?: string;

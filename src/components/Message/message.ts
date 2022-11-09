@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './message.pug';
-import './message.scss';
+// import './message.scss';
 
 interface MessageProps {
 	id: number;

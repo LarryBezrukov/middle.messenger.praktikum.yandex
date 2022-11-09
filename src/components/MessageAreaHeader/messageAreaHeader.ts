@@ -8,7 +8,7 @@ import InputGroup from '../InputGroup/inputGroup';
 import Link from '../Link/link';
 import Modal from '../Modal/modal';
 import template from './messageAreaHeader.pug';
-import './messageAreaHeader.scss';
+// import './messageAreaHeader.scss';
 
 class MessageAreaHeader extends Block {
 	protected initChildren() {

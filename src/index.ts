@@ -5,7 +5,7 @@ import SigninPage from './pages/signin/signin';
 import SignupPage from './pages/signup/signup';
 import ErrorPage from './pages/error/error';
 import AuthController from './controllers/AuthController';
-import './styles/global.scss';
+// import './styles/global.scss';
 
 document.addEventListener('DOMContentLoaded', async () => {
 	const router = new Router();

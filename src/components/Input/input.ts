@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './input.pug';
-import './input.scss';
+// import './input.scss';
 
 interface InputProps {
 	type: string;
