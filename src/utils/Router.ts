@@ -1,12 +1,16 @@
 import Block from './Block';
 
+export interface BlockConstructable<P extends object = any> {
+	new (props: P): Block<P>;
+}
+
 class Route {
 	private pathname: string;
-	private BlockClass: typeof Block;
+	private BlockClass: BlockConstructable;
 	private block: Block | null;
 	private props: any;
 
-	constructor(pathname: string, view: typeof Block, props: any) {
+	constructor(pathname: string, view: BlockConstructable, props: any) {
 		this.pathname = pathname;
 		this.BlockClass = view;
 		this.block = null;
@@ -60,7 +64,7 @@ export default class Router {
 		Router.__instance = this;
 	}
 
-	public use(pathname: string, block: typeof Block, props: any = {}) {
+	public use(pathname: string, block: BlockConstructable, props: any = {}) {
 		const route = new Route(pathname, block, { rootQuery: '#app', pageProps: props });
 
 		this.routes.push(route);
