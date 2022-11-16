@@ -1,4 +1,3 @@
-import template from '@pages/signup/signup.pug';
 import Block from '../../utils/Block';
 import AuthController, { ControllerSignUpData } from '../../controllers/AuthController';
 import { ValidationType } from '../../utils/Validator';
@@ -6,6 +5,7 @@ import Form from '../../components/Form/form';
 import InputGroup from '../../components/InputGroup/inputGroup';
 import Button from '../../components/Button/button';
 import Link from '../../components/Link/link';
+import template from './signup.pug';
 
 export default class SignupPage extends Block {
 	protected initChildren() {

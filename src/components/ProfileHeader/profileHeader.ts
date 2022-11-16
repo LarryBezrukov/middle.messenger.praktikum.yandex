@@ -1,6 +1,6 @@
-import template from '@components/profileHeader/profileHeader.pug';
 import Block from '../../utils/Block';
 import { withStore } from '../../utils/Store';
+import template from './profileHeader.pug';
 import './profileHeader.scss';
 
 class ProfileHeader extends Block {

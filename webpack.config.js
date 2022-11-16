@@ -46,10 +46,6 @@ const config = {
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
-		alias: {
-			'@pages': path.resolve(__dirname, 'src/pages'),
-			'@components': path.resolve(__dirname, 'src/components'),
-		},
 	},
 };
 
