@@ -20,7 +20,14 @@ class ChatsController {
 			return 0;
 		});
 
-		store.set('chats', sortedChats);
+		const chatsWithAvatars = sortedChats.map((chat) => {
+			if (chat.avatar) {
+				return { ...chat, avatar: `${process.env.ENDPOINT}/resources${chat.avatar}` };
+			}
+			return chat;
+		});
+
+		store.set('chats', chatsWithAvatars);
 	}
 
 	async getToken(chatId: number) {

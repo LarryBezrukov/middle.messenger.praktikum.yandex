@@ -11,18 +11,17 @@ export default class Block<P extends object = any> {
 
 	public id = nanoid(6);
 
-	public _element: HTMLElement | null = null;
 	protected props: P;
 	public children: Record<string, Block | Block[]>;
+	public _element: HTMLElement | null = null;
 
 	private eventBus: () => EventBus;
 
-	constructor(propsAndChildren: any = {}) {
+	constructor(propsAndChildren = {} as P) {
 		const eventBus = new EventBus();
-		const { props, children } = this.getChildren(propsAndChildren);
+		const { props, children } = this._getPropsChildren(propsAndChildren);
 
 		this.children = children;
-
 		this.props = this._makePropsProxy(props) as P;
 
 		this.initChildren();
@@ -32,9 +31,9 @@ export default class Block<P extends object = any> {
 		eventBus.emit(Block.EVENTS.INIT);
 	}
 
-	getChildren(propsAndChildren: any) {
-		const children: any = {};
-		const props: any = {};
+	private _getPropsChildren(propsAndChildren: P) {
+		const props: Record<string, unknown> = {};
+		const children: Record<string, Block | Block[]> = {};
 
 		Object.entries(propsAndChildren).forEach(([key, value]) => {
 			if (value instanceof Block) {
@@ -46,7 +45,7 @@ export default class Block<P extends object = any> {
 			}
 		});
 
-		return { props, children };
+		return { props: props as P, children };
 	}
 
 	protected initChildren() {}
@@ -72,18 +71,18 @@ export default class Block<P extends object = any> {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
 
-	private _componentDidUpdate(oldProps: any, newProps: any) {
+	private _componentDidUpdate(oldProps: P, newProps: P) {
 		if (this.componentDidUpdate(oldProps, newProps)) {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	componentDidUpdate(_oldProps: any, _newProps: any) {
+	componentDidUpdate(_oldProps: P, _newProps: P) {
 		return true;
 	}
 
-	setProps = (nextProps: any) => {
+	setProps = (nextProps: P) => {
 		if (!nextProps) {
 			return;
 		}
@@ -122,7 +121,7 @@ export default class Block<P extends object = any> {
 		return this.element;
 	}
 
-	private _makePropsProxy(props: any) {
+	private _makePropsProxy(props: P) {
 		return new Proxy(props as unknown as object, {
 			get: (target: Record<string, unknown>, prop: string) => {
 				const value = target[prop];
