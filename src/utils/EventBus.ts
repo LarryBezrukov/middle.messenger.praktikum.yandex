@@ -1,6 +1,6 @@
 type Handler = (...args: unknown[]) => void;
 
-export default class EventBus {
+export class EventBus {
 	private listeners: Record<string, Handler[]> = {};
 
 	public on(event: string, callback: Handler): void {

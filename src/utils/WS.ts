@@ -123,7 +123,13 @@ class WS {
 	private errorEventHandler = (event: ErrorEvent) => console.log('Ошибка', event.message);
 
 	private messageEventHandler = (event: MessageEvent) => {
-		const data = JSON.parse(event.data);
+		let data;
+
+		try {
+			data = JSON.parse(event.data);
+		} catch (e) {
+			console.log(e);
+		}
 
 		console.log('Получены данные', data);
 

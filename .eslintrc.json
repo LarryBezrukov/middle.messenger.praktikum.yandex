@@ -30,8 +30,12 @@
 		"@typescript-eslint/lines-between-class-members": "off",
 		"max-classes-per-file": "off",
 		"no-constructor-return": "off",
+		"import/no-extraneous-dependencies": "off",
 		"@typescript-eslint/naming-convention": "off",
 		"@typescript-eslint/no-var-requires": "off",
-		"import/no-extraneous-dependencies": "off"
+		"@typescript-eslint/ban-ts-comment": "off",
+		"@typescript-eslint/no-unused-expressions": "off",
+		"import/prefer-default-export": "off",
+		"no-new": "off"
 	}
 }

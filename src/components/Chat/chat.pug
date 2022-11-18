@@ -1,5 +1,9 @@
 .chat(class=currentChatId === id ? 'chat_selected' : '')
-	.chat__profile-picture
+	.chat__avatar
+		if avatar
+			img.chat__avatar-image(src=avatar, alt='Chat avatar')
+		else
+			.chat__avatar-placeholder
 	.chat__content 
 		div= title
 		if last_message

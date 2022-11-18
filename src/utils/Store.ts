@@ -1,5 +1,5 @@
 import Block from './Block';
-import EventBus from './EventBus';
+import { EventBus } from './EventBus';
 import { isEqual, set } from './helpers';
 
 export enum StoreEvents {

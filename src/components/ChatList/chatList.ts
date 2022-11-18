@@ -15,6 +15,9 @@ import './chatList.scss';
 interface ChatListProps {
 	chats: ChatInterface[];
 	currentUser: UserInterface;
+	newChatModal: {
+		isOpen: boolean;
+	};
 }
 
 class ChatList extends Block<ChatListProps> {
@@ -101,6 +104,7 @@ class ChatList extends Block<ChatListProps> {
 
 	openNewChatModal() {
 		this.setProps({
+			...this.props,
 			newChatModal: {
 				isOpen: true,
 			},
@@ -109,6 +113,7 @@ class ChatList extends Block<ChatListProps> {
 
 	closeNewChatModal() {
 		this.setProps({
+			...this.props,
 			newChatModal: {
 				isOpen: false,
 			},
